@@ -1,432 +1,373 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const scrollTopBtn = document.getElementById("scrollTopBtn");
-  const sections = document.querySelectorAll("section");
-  const buttons = document.querySelectorAll("button");
-
-  // Add ripple effect to buttons - refactored to use a reusable function
-  function createRippleEffect(element, event) {
-    const ripple = document.createElement("div");
-    const rect = element.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-
-    ripple.classList.add("ripple-effect");
-    ripple.style.left = `${x}px`;
-    ripple.style.top = `${y}px`;
-
-    element.appendChild(ripple);
-    setTimeout(() => ripple.remove(), 600);
-  }
-
-  buttons.forEach((button) => {
-    button.style.position = "relative";
-    button.style.overflow = "hidden";
-    button.addEventListener("click", function (e) {
-      createRippleEffect(this, e);
-    });
-  });
-
-  // Set initial opacity for car cards and add animation class
-  const carCards = document.querySelectorAll(".car-card");
-  carCards.forEach((card, index) => {
-    // Add data-car-id attribute to each car card for booking functionality
-    card.setAttribute("data-car-id", `car-${index + 1}`);
-    card.style.opacity = "0";
-    card.classList.add("animate-slide-in");
-  });
-
-  // Improved Intersection Observer for revealing elements on scroll
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = "1";
-          // Stop observing the element after it's been revealed
-          observer.unobserve(entry.target);
-        }
+// Wait for DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+  // Set minimum dates for date inputs to today
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('pickupDate').min = today;
+  document.getElementById('returnDate').min = today;
+  
+  // Show/hide rental form
+  const showFormBtn = document.getElementById('showFormBtn');
+  const formSection = document.getElementById('formSection');
+  
+  if (showFormBtn && formSection) {
+      showFormBtn.addEventListener('click', function() {
+          formSection.classList.remove('hidden');
+          formSection.scrollIntoView({ behavior: 'smooth' });
       });
-    },
-    { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
-  );
-
-  // Observe car cards
-  carCards.forEach((card) => {
-    observer.observe(card);
-  });
-
-  // Throttled scroll event handling for better performance
-  let lastScrollTime = 0;
-  const scrollThrottle = 100; // ms
-
-  window.addEventListener("scroll", function () {
-    const now = Date.now();
-    if (now - lastScrollTime < scrollThrottle) return;
-    lastScrollTime = now;
-
-    // Show/hide scroll to top button
-    if (window.pageYOffset > 300) {
-      scrollTopBtn.style.display = "block";
-      scrollTopBtn.classList.add("visible");
-    } else {
-      scrollTopBtn.classList.remove("visible");
-      // Use a timeout to allow the fade-out animation to complete
-      setTimeout(() => {
-        if (!scrollTopBtn.classList.contains("visible")) {
-          scrollTopBtn.style.display = "none";
-        }
-      }, 300);
-    }
-    
-    // Add fade-in animation to sections when scrolled into view
-    sections.forEach((section) => {
-      const sectionTop = section.getBoundingClientRect().top;
-      const windowHeight = window.innerHeight;
-      if (sectionTop < windowHeight * 0.75) {
-        section.classList.add("animate-fade-in");
-      }
-    });
-  });
-
-  // Scroll to top button functionality
-  scrollTopBtn.addEventListener("click", function () {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  });
-
-  // Smooth scrolling for navigation links
-  const navLinks = document.querySelectorAll("nav a");
-  navLinks.forEach((link) => {
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
-      const targetId = this.getAttribute("href");
-      if (targetId === "#") return;
+  }
+  
+  // Price calculator functionality
+  const rentalForm = document.getElementById('rentalForm');
+  if (rentalForm) {
+      // Elements for price calculation
+      const pickupDateInput = document.getElementById('pickupDate');
+      const returnDateInput = document.getElementById('returnDate');
+      const carTypeSelect = document.getElementById('carType');
+      const extrasCheckboxes = document.querySelectorAll('input[name="extras"]');
+      const basePriceEl = document.getElementById('basePrice');
+      const extrasPriceEl = document.getElementById('extrasPrice');
+      const totalPriceEl = document.getElementById('totalPrice');
       
-      const targetSection = document.querySelector(targetId);
-      if (targetSection) {
-        // Offset for fixed header if present
-        const headerOffset = document.querySelector("nav")?.offsetHeight || 0;
-        const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - headerOffset;
-        
-        window.scrollTo({
-          top: targetPosition,
-          behavior: "smooth",
-        });
-      }
-    });
-  });
-
-  // Search form submission handler with validation
-  const searchForm = document.querySelector(".search-form");
-  if (searchForm) {
-    // Convert the div to a form if it isn't already
-    if (searchForm.tagName !== "FORM") {
-      searchForm.addEventListener("click", function(e) {
-        if (e.target.tagName === "BUTTON") {
-          e.preventDefault();
+      // Car type prices per day
+      const carPrices = {
+          'economy': 50,
+          'sedan': 65,
+          'suv': 80,
+          'truck': 85,
+          'luxury': 120,
+          'van': 90
+      };
+      
+      // Extra services prices per day
+      const extraPrices = {
+          'gps': 5,
+          'childSeat': 3,
+          'insurance': 10
+      };
+      
+      // Function to calculate rental price
+      function calculatePrice() {
+          // Get dates
+          const pickupDate = new Date(pickupDateInput.value);
+          const returnDate = new Date(returnDateInput.value);
           
-          // Get all inputs within the search form
-          const inputs = searchForm.querySelectorAll("input");
-          const formData = {};
-          let hasValue = false;
+          // Validate dates
+          if (!pickupDate || !returnDate || pickupDate > returnDate) {
+              return;
+          }
           
-          inputs.forEach(input => {
-            formData[input.placeholder || input.type] = input.value;
-            if (input.value.trim() !== "") hasValue = true;
+          // Calculate days (including partial days)
+          const timeDiff = returnDate - pickupDate;
+          const days = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+          
+          // Calculate base price
+          const carType = carTypeSelect.value;
+          let basePrice = 0;
+          if (carType && carPrices[carType]) {
+              basePrice = carPrices[carType] * days;
+          }
+          
+          // Calculate extras price
+          let extrasPrice = 0;
+          extrasCheckboxes.forEach(checkbox => {
+              if (checkbox.checked && extraPrices[checkbox.value]) {
+                  extrasPrice += extraPrices[checkbox.value] * days;
+              }
           });
           
-          if (hasValue) {
-            console.log("Search submitted:", formData);
-            // Process search data or redirect
-          } else {
-            // Show error message
-            const errorMsg = document.querySelector(".search-error") || document.createElement("div");
-            errorMsg.classList.add("search-error", "text-white", "bg-red-500", "p-2", "rounded", "mt-2");
-            errorMsg.textContent = "Please enter at least one search criterion";
-            
-            if (!document.querySelector(".search-error")) {
-              searchForm.appendChild(errorMsg);
-              // Remove error message after 3 seconds
-              setTimeout(() => errorMsg.remove(), 3000);
-            }
-          }
-        }
-      });
-    } else {
-      // Regular form handling
-      searchForm.addEventListener("submit", function (e) {
-        e.preventDefault();
-        
-        // Simple validation
-        const formData = new FormData(e.target);
-        const searchData = Object.fromEntries(formData);
-        
-        // Check if at least one field is filled
-        const hasValue = Object.values(searchData).some(value => value.trim() !== "");
-        
-        if (hasValue) {
-          console.log("Search submitted:", searchData);
-          // Here you would typically send the data to a server or process it
-        } else {
-          // Show error message
-          const errorMsg = document.querySelector(".search-error") || document.createElement("div");
-          errorMsg.classList.add("search-error", "text-white", "bg-red-500", "p-2", "rounded", "mt-2");
-          errorMsg.textContent = "Please enter at least one search criterion";
-          
-          if (!document.querySelector(".search-error")) {
-            searchForm.appendChild(errorMsg);
-            // Remove error message after 3 seconds
-            setTimeout(() => errorMsg.remove(), 3000);
-          }
-        }
-      });
-    }
-  }
-
-  // Car booking button handlers
-  const bookButtons = document.querySelectorAll(".car-card button");
-  bookButtons.forEach((button) => {
-    button.addEventListener("click", function() {
-      const carCard = this.closest(".car-card");
-      const carId = carCard.dataset.carId;
-      const carName = carCard.querySelector("h3")?.textContent || "Selected car";
-      const carPrice = carCard.querySelector(".text-primary")?.textContent || "";
-      
-      // Show booking modal or redirect to booking page
-      showBookingModal(carId, carName, carPrice);
-    });
-  });
-
-  // Function to show booking modal
-  function showBookingModal(carId, carName, carPrice) {
-    // Create or show a modal for booking
-    const modal = document.getElementById("bookingModal") || createBookingModal();
-    
-    // Update modal content with car details
-    const modalTitle = modal.querySelector(".modal-title");
-    if (modalTitle) modalTitle.textContent = `Book ${carName}`;
-    
-    // Set car ID in a hidden input
-    const carIdInput = modal.querySelector("#bookingCarId");
-    if (carIdInput) carIdInput.value = carId;
-    
-    // Set price info if available
-    const priceInfo = modal.querySelector(".price-info");
-    if (priceInfo && carPrice) priceInfo.textContent = `Rate: ${carPrice}`;
-    
-    // Show the modal
-    modal.classList.add("active");
-    
-    // Add modal styles if they don't exist
-    if (!document.getElementById("modalStyles")) {
-      const modalStyles = document.createElement("style");
-      modalStyles.id = "modalStyles";
-      modalStyles.textContent = `
-        .modal {
-          display: none;
-          position: fixed;
-          z-index: 100;
-          left: 0;
-          top: 0;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(0, 0, 0, 0.5);
-          align-items: center;
-          justify-content: center;
-        }
-        .modal.active {
-          display: flex;
-        }
-        .modal-content {
-          background-color: white;
-          padding: 2rem;
-          border-radius: 8px;
-          max-width: 500px;
-          width: 90%;
-          position: relative;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .close-modal {
-          position: absolute;
-          right: 1rem;
-          top: 1rem;
-          font-size: 1.5rem;
-          cursor: pointer;
-        }
-        .form-group {
-          margin-bottom: 1rem;
-        }
-        .form-group label {
-          display: block;
-          margin-bottom: 0.5rem;
-          font-weight: 500;
-        }
-        .form-group input {
-          width: 100%;
-          padding: 0.5rem;
-          border: 1px solid #e2e8f0;
-          border-radius: 4px;
-        }
-        .booking-confirmation {
-          text-align: center;
-          color: #1a56db;
-          padding: 1rem;
-          font-weight: 500;
-        }
-        .ripple-effect {
-          position: absolute;
-          border-radius: 50%;
-          background-color: rgba(255, 255, 255, 0.7);
-          width: 100px;
-          height: 100px;
-          margin-top: -50px;
-          margin-left: -50px;
-          animation: ripple 0.6s linear;
-          transform: scale(0);
-          opacity: 1;
-        }
-        @keyframes ripple {
-          to {
-            transform: scale(4);
-            opacity: 0;
-          }
-        }
-        .animate-slide-in {
-          transition: opacity 0.5s ease, transform 0.5s ease;
-          transform: translateY(20px);
-        }
-        .animate-slide-in[style*="opacity: 1"] {
-          transform: translateY(0);
-        }
-        .animate-fade-in {
-          animation: fadeIn 0.8s ease forwards;
-        }
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        #scrollTopBtn {
-          position: fixed;
-          bottom: 30px;
-          right: 30px;
-          z-index: 99;
-          display: none;
-          opacity: 0;
-          transition: opacity 0.3s ease;
-        }
-        #scrollTopBtn.visible {
-          opacity: 1;
-        }
-      `;
-      document.head.appendChild(modalStyles);
-    }
-  }
-
-  // Function to create booking modal if it doesn't exist
-  function createBookingModal() {
-    const modal = document.createElement("div");
-    modal.id = "bookingModal";
-    modal.classList.add("modal");
-    
-    modal.innerHTML = `
-      <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <h2 class="modal-title text-2xl font-bold mb-4">Book a Car</h2>
-        <p class="price-info text-primary font-bold mb-4"></p>
-        <form id="bookingForm">
-          <input type="hidden" id="bookingCarId" name="carId">
-          <div class="form-group">
-            <label for="bookingPickupLocation">Pick-up Location</label>
-            <input type="text" id="bookingPickupLocation" name="pickupLocation" required>
-          </div>
-          <div class="form-group">
-            <label for="bookingDropoffLocation">Drop-off Location</label>
-            <input type="text" id="bookingDropoffLocation" name="dropoffLocation" required>
-          </div>
-          <div class="form-group">
-            <label for="bookingDate">Pick-up Date</label>
-            <input type="date" id="bookingDate" name="date" required>
-          </div>
-          <div class="form-group">
-            <label for="bookingReturnDate">Return Date</label>
-            <input type="date" id="bookingReturnDate" name="returnDate" required>
-          </div>
-          <div class="form-group">
-            <label for="bookingName">Full Name</label>
-            <input type="text" id="bookingName" name="name" required>
-          </div>
-          <div class="form-group">
-            <label for="bookingEmail">Email</label>
-            <input type="email" id="bookingEmail" name="email" required>
-          </div>
-          <div class="form-group">
-            <label for="bookingPhone">Phone</label>
-            <input type="tel" id="bookingPhone" name="phone" required>
-          </div>
-          <button type="submit" class="w-full bg-primary text-white py-2 rounded hover:bg-primary/90 transition-colors cursor-pointer">Confirm Booking</button>
-        </form>
-      </div>
-    `;
-    
-    document.body.appendChild(modal);
-    
-    // Add event listeners for modal
-    const closeBtn = modal.querySelector(".close-modal");
-    closeBtn.addEventListener("click", () => {
-      modal.classList.remove("active");
-    });
-    
-    // Close modal when clicking outside
-    window.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        modal.classList.remove("active");
+          // Update price display
+          basePriceEl.textContent = `$${basePrice}`;
+          extrasPriceEl.textContent = `$${extrasPrice}`;
+          totalPriceEl.textContent = `$${basePrice + extrasPrice}`;
       }
-    });
-    
-    // Handle booking form submission
-    const bookingForm = modal.querySelector("#bookingForm");
-    bookingForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const formData = new FormData(e.target);
-      const bookingData = Object.fromEntries(formData);
       
-      console.log("Booking submitted:", bookingData);
-      // Here you would typically send the booking data to a server
+      // Add event listeners for price calculation
+      pickupDateInput.addEventListener('change', calculatePrice);
+      returnDateInput.addEventListener('change', calculatePrice);
+      carTypeSelect.addEventListener('change', calculatePrice);
+      extrasCheckboxes.forEach(checkbox => {
+          checkbox.addEventListener('change', calculatePrice);
+      });
       
-      // Show confirmation message
-      bookingForm.innerHTML = `<div class="booking-confirmation">Booking confirmed! We'll contact you shortly with the details.</div>`;
-      
-      // Close modal after a delay
-      setTimeout(() => {
-        modal.classList.remove("active");
-      }, 3000);
-    });
-    
-    return modal;
+      // Form submission
+      rentalForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          alert('Your reservation has been submitted! A confirmation email will be sent shortly.');
+          rentalForm.reset();
+          calculatePrice();
+      });
   }
-
-  // Initialize mobile menu toggle if needed
-  const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-  const mobileMenu = document.querySelector('.md\\:flex');
   
-  if (mobileMenuBtn && mobileMenu) {
-    mobileMenuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
+  // Car filtering and sorting functionality
+  const filterCategory = document.getElementById('filterCategory');
+  const searchCars = document.getElementById('searchCars');
+  const sortBy = document.getElementById('sortBy');
+  const cars = document.querySelectorAll('.car');
+  
+  function filterAndSortCars() {
+      const category = filterCategory.value;
+      const searchTerm = searchCars.value.toLowerCase();
+      const sortOption = sortBy.value;
+      
+      // Convert cars to array for sorting
+      const carsArray = Array.from(cars);
+      
+      // Sort cars
+      carsArray.sort((a, b) => {
+          if (sortOption === 'name') {
+              const nameA = a.getAttribute('data-name') || a.querySelector('h3').textContent;
+              const nameB = b.getAttribute('data-name') || b.querySelector('h3').textContent;
+              return nameA.localeCompare(nameB);
+          } else if (sortOption === 'price-low') {
+              const priceA = parseInt(a.getAttribute('data-price') || 0);
+              const priceB = parseInt(b.getAttribute('data-price') || 0);
+              return priceA - priceB;
+          } else if (sortOption === 'price-high') {
+              const priceA = parseInt(a.getAttribute('data-price') || 0);
+              const priceB = parseInt(b.getAttribute('data-price') || 0);
+              return priceB - priceA;
+          }
+          return 0;
+      });
+      
+      // Filter and display cars
+      carsArray.forEach(car => {
+          const carCategory = car.getAttribute('data-category');
+          const carName = (car.getAttribute('data-name') || car.querySelector('h3').textContent).toLowerCase();
+          
+          const categoryMatch = category === 'all' || !carCategory || carCategory === category;
+          const searchMatch = !searchTerm || carName.includes(searchTerm);
+          
+          if (categoryMatch && searchMatch) {
+              car.style.display = '';
+          } else {
+              car.style.display = 'none';
+          }
+      });
+      
+      // Reorder cars in the DOM based on sort
+      const carGalleries = document.querySelectorAll('.car-gallery');
+      carGalleries.forEach(gallery => {
+          const galleryCars = Array.from(gallery.querySelectorAll('.car')).filter(car => car.style.display !== 'none');
+          galleryCars.forEach(car => gallery.appendChild(car));
+      });
   }
-
-  // Add animation to main hero section
-  const heroSection = document.querySelector('section.relative.h-screen');
-  if (heroSection) {
-    setTimeout(() => {
-      heroSection.classList.add('animate-fade-in');
-    }, 300);
+  
+  if (filterCategory && searchCars && sortBy) {
+      filterCategory.addEventListener('change', filterAndSortCars);
+      searchCars.addEventListener('input', filterAndSortCars);
+      sortBy.addEventListener('change', filterAndSortCars);
+  }
+  
+  // Car details modal functionality
+  const modal = document.getElementById('carDetailsModal');
+  const modalImage = document.getElementById('modalImage');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalDescription = document.getElementById('modalDescription');
+  const modalPrice = document.getElementById('modalPrice');
+  const modalFeatures = document.getElementById('modalFeatures');
+  const modalAvailability = document.getElementById('modalAvailability');
+  const modalReserveBtn = document.getElementById('modalReserveBtn');
+  const closeModalBtn = document.querySelector('.close-modal');
+  
+  // Sample feature data for cars
+  const carFeatures = {
+      'Economy Sedan': ['Fuel efficient', 'Bluetooth', 'USB port', 'Air conditioning'],
+      'Mid-size SUV': ['All wheel drive', 'Roof rack', 'Navigation', 'Backup camera'],
+      'Pickup Truck': ['Towing package', '4-wheel drive', 'Bed liner', 'Power outlets'],
+      'Compact Car': ['Great mileage', 'Easy parking', 'Bluetooth', 'USB port'],
+      'Cargo Van': ['Large cargo space', 'Tie-down points', 'Sliding door', 'Backup camera'],
+      'Panel Van': ['Medium cargo area', 'Roof rack', 'Power outlets', 'Bluetooth'],
+      'Executive Sedan': ['Leather seats', 'Premium sound', 'Navigation', 'Heated seats'],
+      'Luxury SUV': ['Panoramic roof', 'Premium audio', 'Advanced safety', 'Third row seating']
+  };
+  
+  // Open modal with car details
+  const viewDetailsBtns = document.querySelectorAll('.view-details-btn');
+  viewDetailsBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+          const car = this.closest('.car');
+          const carName = car.getAttribute('data-name') || car.querySelector('h3').textContent;
+          const carPrice = car.getAttribute('data-price') || car.querySelector('p').textContent.match(/\$(\d+)/)[1];
+          const carImg = car.querySelector('img').src;
+          
+          modalImage.src = carImg;
+          modalTitle.textContent = carName;
+          modalDescription.textContent = `Experience the comfort and reliability of our ${carName}. Perfect for ${getCarUseCase(carName)}.`;
+          modalPrice.textContent = `Price: $${carPrice}/day`;
+          
+          // Clear and populate features
+          modalFeatures.innerHTML = '';
+          if (carFeatures[carName]) {
+              carFeatures[carName].forEach(feature => {
+                  const li = document.createElement('li');
+                  li.textContent = feature;
+                  modalFeatures.appendChild(li);
+              });
+          }
+          
+          modalAvailability.textContent = getRandomAvailability();
+          
+          modal.classList.add('show');
+      });
+  });
+  
+  // Helper function to get car use case
+  function getCarUseCase(carName) {
+      if (carName.includes('SUV')) return 'family trips and outdoor adventures';
+      if (carName.includes('Sedan')) return 'business travel and city driving';
+      if (carName.includes('Truck')) return 'hauling and rugged terrain';
+      if (carName.includes('Compact')) return 'city driving and fuel economy';
+      if (carName.includes('Van')) return 'moving goods or equipment';
+      if (carName.includes('Luxury')) return 'premium travel experiences';
+      return 'all your travel needs';
+  }
+  
+  // Helper function to generate random availability
+  function getRandomAvailability() {
+      const options = [
+          'Available now at all locations',
+          'Limited availability - book soon',
+          'Available at Downtown and Airport locations',
+          '5 vehicles currently available'
+      ];
+      return options[Math.floor(Math.random() * options.length)];
+  }
+  
+  // Close modal
+  if (closeModalBtn) {
+      closeModalBtn.addEventListener('click', function() {
+          modal.classList.remove('show');
+      });
+  }
+  
+  // Close modal when clicking outside
+  window.addEventListener('click', function(e) {
+      if (e.target === modal) {
+          modal.classList.remove('show');
+      }
+  });
+  
+  // Modal reserve button
+  if (modalReserveBtn) {
+      modalReserveBtn.addEventListener('click', function() {
+          modal.classList.remove('show');
+          
+          // Scroll to the rental form
+          formSection.classList.remove('hidden');
+          formSection.scrollIntoView({ behavior: 'smooth' });
+      });
+  }
+  
+  // Special offers buttons
+  const viewOfferBtns = document.querySelectorAll('.view-offer-btn');
+  viewOfferBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+          const offerTitle = this.closest('.car').querySelector('h3').textContent;
+          alert(`Special offer details for "${offerTitle}" will be sent to your email. Please fill out the contact form to receive more information.`);
+          document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+      });
+  });
+  
+  // Star rating system
+  const stars = document.querySelectorAll('#reviewForm .star');
+  const ratingValue = document.getElementById('ratingValue');
+  
+  stars.forEach(star => {
+      star.addEventListener('click', function() {
+          const rating = parseInt(this.getAttribute('data-rating'));
+          ratingValue.value = rating;
+          
+          // Update visual stars
+          stars.forEach(s => {
+              if (parseInt(s.getAttribute('data-rating')) <= rating) {
+                  s.classList.add('active');
+              } else {
+                  s.classList.remove('active');
+              }
+          });
+      });
+      
+      star.addEventListener('mouseover', function() {
+          const rating = parseInt(this.getAttribute('data-rating'));
+          
+          // Highlight stars on hover
+          stars.forEach(s => {
+              if (parseInt(s.getAttribute('data-rating')) <= rating) {
+                  s.classList.add('hover');
+              } else {
+                  s.classList.remove('hover');
+              }
+          });
+      });
+      
+      star.addEventListener('mouseout', function() {
+          stars.forEach(s => s.classList.remove('hover'));
+      });
+  });
+  
+  // Review form submission
+  const reviewForm = document.getElementById('reviewForm');
+  if (reviewForm) {
+      reviewForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          const rating = parseInt(ratingValue.value);
+          const reviewText = document.getElementById('reviewText').value;
+          const reviewName = document.getElementById('reviewName').value;
+          
+          if (rating === 0) {
+              alert('Please select a rating');
+              return;
+          }
+          
+          alert('Thank you for your review! It will be published after moderation.');
+          reviewForm.reset();
+          stars.forEach(s => s.classList.remove('active'));
+          ratingValue.value = 0;
+      });
+  }
+  
+  // Contact form submission
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+      contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          alert('Thank you for your message! We will get back to you soon.');
+          contactForm.reset();
+      });
+  }
+  
+  // Fade-in animation for sections
+  const fadeInSections = document.querySelectorAll('.fade-in');
+  
+  function checkFadeIn() {
+      fadeInSections.forEach(section => {
+          const sectionTop = section.getBoundingClientRect().top;
+          const windowHeight = window.innerHeight;
+          
+          if (sectionTop < windowHeight * 0.8) {
+              section.style.opacity = 1;
+          }
+      });
+  }
+  
+  // Initialize sections as invisible
+  fadeInSections.forEach(section => {
+      if (!section.classList.contains('hidden')) {
+          section.style.opacity = 0;
+          section.style.transition = 'opacity 0.5s ease';
+      }
+  });
+  
+  // Check fade-in on load and scroll
+  checkFadeIn();
+  window.addEventListener('scroll', checkFadeIn);
+  
+  // Simple map placeholder
+  // In a real implementation, you would use Google Maps or another API
+  const mapContainer = document.getElementById('map');
+  if (mapContainer) {
+      mapContainer.innerHTML = '<img src="https://via.placeholder.com/1200x300?text=Interactive+Map+of+Our+Locations" alt="Map" style="width:100%; height:100%;">';
   }
 });
