@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Testimonials</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            font-size: 2.5rem;
+        }
+        .testimonial-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        .testimonial-wrapper {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .testimonial {
+            min-width: 100%;
+            padding: 30px;
+            text-align: center;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            position: relative;
+        }
+        .testimonial-content {
+            margin-bottom: 20px;
+        }
+        .testimonial-author {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 10px;
+        }
+        .rating {
+            color: #f39c12;
+            margin-bottom: 15px;
+        }
+        .rating .fa-star {
+            margin: 0 2px;
+        }
+        .testimonial-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+        .navigation-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .nav-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .nav-btn:hover {
+            background-color: #2980b9;
+        }
+        .add-testimonial {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .add-testimonial-btn {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .add-testimonial-btn:hover {
+            background-color: #27ae60;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+        }
+        .modal-content textarea,
+        .modal-content input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .submit-testimonial-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .testimonial-actions {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .edit-btn, .delete-btn {
+            background: none;
+            border: none;
+            color: #7f8c8d;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: color 0.3s ease;
+        }
+        .edit-btn:hover, .delete-btn:hover {
+            color: #2c3e50;
+        }
+        .star-rating {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+        }
+        .star-rating .fa-star {
+            font-size: 1.5rem;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .star-rating .fa-star.active {
+            color: #f39c12;
+        }
+        nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.logo img {
+    width: 40px;
+    margin-right: 10px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--secondary-color);
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+.mobile-menu {
+    display: none;
+}
+
+.hero {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    padding: 0 5%;
+    margin-top: 70px;
+}
+
+.hero-content {
+    flex: 1;
+    padding-right: 50px;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: var(--secondary-color);
+}
+
+.hero-content p {
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+
+.cta-button {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #2980b9;
+}
+
+.hero-image {
+    flex: 1;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .mobile-menu {
+        display: block;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-content {
+        padding-right: 0;
+        margin-bottom: 30px;
+    }
+
+    .hero-image img {
+        max-width: 100%;
+    }
+}
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="C:\Users\Gaurav Chandrasekhar\Downloads\caricon (1).jpg" alt="Car Icon">
+                Premium Car Rental
+            </div>
+            <div class="nav-links">
+                <a href="Opening page.html"><i class="fas fa-home"></i> Home</a>
+                <a href="Car page project.html"><i class="fas fa-car"></i> Cars</a>
+                <a href="#offers"><i class="fas fa-tags"></i> Special Offers</a>
+                <a href="Testimonials.html"><i class="fas fa-comment"></i> Testimonials</a>
+                <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+                <a href="#locations"><i class="fas fa-map-marker-alt"></i> Locations</a>
+            </div>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <h1 class="section-title">Customer Testimonials</h1>
+        
+        <div class="testimonial-container">
+            <div class="testimonial-wrapper" id="testimonialWrapper">
+                <!-- Testimonials will be dynamically rendered here -->
+            </div>
+        </div>
+
+        <div class="navigation-buttons">
+            <button class="nav-btn" onclick="prevTestimonial()">
+                <i class="fas fa-chevron-left"></i> Previous
+            </button>
+            <button class="nav-btn" onclick="nextTestimonial()">
+                Next <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <div class="add-testimonial">
+            <button class="add-testimonial-btn" onclick="openTestimonialModal()">
+                <i class="fas fa-plus"></i> Add Your Testimonial
+            </button>
+        </div>
+    </div>
+
+    <div id="testimonialModal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle">Share Your Experience</h2>
+            <div class="star-rating" id="modalRating">
+                <i class="fas fa-star" data-rating="1"></i>
+                <i class="fas fa-star" data-rating="2"></i>
+                <i class="fas fa-star" data-rating="3"></i>
+                <i class="fas fa-star" data-rating="4"></i>
+                <i class="fas fa-star" data-rating="5"></i>
+            </div>
+            <input type="text" id="authorName" placeholder="Your Name">
+            <textarea id="testimonialText" placeholder="Share your experience..." rows="4"></textarea>
+            <input type="hidden" id="editIndex" value="-1">
+            <button class="submit-testimonial-btn" onclick="submitTestimonial()">Submit Testimonial</button>
+        </div>
+    </div>
+
+    <script>
+        // Testimonials data array to store and manage testimonials
+        let testimonials = [
+            {
+                rating: 5,
+                content: "Great experience! The car was in perfect condition and the process was smooth.",
+                author: "Alex Johnson",
+                date: "March 15, 2025",
+                editable: false
+            },
+            {
+                rating: 4,
+                content: "Excellent service and very friendly staff. Highly recommend!",
+                author: "Priya Sharma",
+                date: "February 28, 2025",
+                editable: false
+            },
+            {
+                rating: 3,
+                content: "Affordable prices and a great selection of vehicles. Will use again!",
+                author: "John Smith",
+                date: "January 10, 2025",
+                editable: false
+            }
+        ];
+
+        let currentIndex = 0;
+        const wrapper = document.getElementById('testimonialWrapper');
+
+        // Function to render testimonials
+        function renderTestimonials() {
+            wrapper.innerHTML = ''; // Clear existing testimonials
+            testimonials.forEach((testimonial, index) => {
+                const testimonialElement = document.createElement('div');
+                testimonialElement.classList.add('testimonial');
+                
+                // Create rating stars
+                const ratingHtml = Array.from({length: 5}, (_, i) => 
+                    `<i class="fas fa-star" style="color: ${i < testimonial.rating ? '#f39c12' : '#ddd'}"></i>`
+                ).join('');
+
+                // Add edit and delete buttons only for editable testimonials
+                const actionButtons = testimonial.editable ? `
+                    <div class="testimonial-actions">
+                        <button class="edit-btn" onclick="editTestimonial(${index})">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="delete-btn" onclick="deleteTestimonial(${index})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                ` : '';
+
+                testimonialElement.innerHTML = `
+                    ${actionButtons}
+                    <div class="rating">
+                        ${ratingHtml}
+                    </div>
+                    <div class="testimonial-content">
+                        "${testimonial.content}"
+                    </div>
+                    <div class="testimonial-meta">
+                        <span class="testimonial-author">- ${testimonial.author}</span>
+                        <span class="testimonial-date">${testimonial.date}</span>
+                    </div>
+                `;
+
+                wrapper.appendChild(testimonialElement);
+            });
+
+            // Update slide position
+            updateSlide();
+        }
+
+        function updateSlide() {
+            wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        function nextTestimonial() {
+            currentIndex = (currentIndex + 1) % testimonials.length;
+            updateSlide();
+        }
+
+        function prevTestimonial() {
+            currentIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
+            updateSlide();
+        }
+
+        // Rating stars in modal
+        const ratingStars = document.querySelectorAll('.star-rating .fa-star');
+        let selectedRating = 0;
+
+        ratingStars.forEach(star => {
+            star.addEventListener('mouseover', function() {
+                const rating = this.getAttribute('data-rating');
+                highlightStars(rating);
+            });
+
+            star.addEventListener('mouseout', function() {
+                highlightStars(selectedRating);
+            });
+
+            star.addEventListener('click', function() {
+                selectedRating = this.getAttribute('data-rating');
+                highlightStars(selectedRating);
+            });
+        });
+
+        function highlightStars(rating) {
+            ratingStars.forEach(star => {
+                const starRating = star.getAttribute('data-rating');
+                if (starRating <= rating) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+
+        function openTestimonialModal() {
+            // Reset modal for new testimonial
+            document.getElementById('modalTitle').textContent = 'Share Your Experience';
+            document.getElementById('authorName').value = '';
+            document.getElementById('testimonialText').value = '';
+            document.getElementById('editIndex').value = '-1';
+            selectedRating = 0;
+            highlightStars(0);
+            document.getElementById('testimonialModal').style.display = 'block';
+        }
+
+        function editTestimonial(index) {
+            const testimonial = testimonials[index];
+            
+            // Populate modal with existing testimonial details
+            document.getElementById('modalTitle').textContent = 'Edit Your Testimonial';
+            document.getElementById('authorName').value = testimonial.author;
+            document.getElementById('testimonialText').value = testimonial.content;
+            document.getElementById('editIndex').value = index;
+            
+            // Set rating
+            selectedRating = testimonial.rating;
+            highlightStars(selectedRating);
+            
+            // Open modal
+            document.getElementById('testimonialModal').style.display = 'block';
+        }
+
+        function deleteTestimonial(index) {
+            // Remove the testimonial at the specified index
+            testimonials.splice(index, 1);
+            
+            // If the current index is now out of bounds, adjust it
+            if (currentIndex >= testimonials.length) {
+                currentIndex = testimonials.length - 1;
+            }
+            
+            // Re-render testimonials
+            renderTestimonials();
+        }
+
+        function submitTestimonial() {
+            const name = document.getElementById('authorName').value;
+            const text = document.getElementById('testimonialText').value;
+            const editIndex = parseInt(document.getElementById('editIndex').value);
+
+            if (name && text && selectedRating) {
+                // Create new testimonial object
+                const newTestimonial = {
+                    rating: parseInt(selectedRating),
+                    content: text,
+                    author: name,
+                    date: new Date().toLocaleDateString(),
+                    editable: true
+                };
+
+                if (editIndex === -1) {
+                    // Add new testimonial to the array
+                    testimonials.push(newTestimonial);
+                    // Move to the last (newly added) testimonial
+                    currentIndex = testimonials.length - 1;
+                } else {
+                    // Update existing testimonial
+                    testimonials[editIndex] = newTestimonial;
+                    // Keep the current index
+                    currentIndex = editIndex;
+                }
+
+                // Re-render testimonials
+                renderTestimonials();
+
+                // Reset modal
+                document.getElementById('authorName').value = '';
+                document.getElementById('testimonialText').value = '';
+                selectedRating = 0;
+                highlightStars(0);
+                document.getElementById('testimonialModal').style.display = 'none';
+            } else {
+                alert('Please fill in all fields and select a rating');
+            }
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('testimonialModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Initial render
+        renderTestimonials();
+    </script>
+</body>
+</html>
