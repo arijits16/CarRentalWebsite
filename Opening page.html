@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <header>
+    <section>
         <nav>
             <div class="logo">
                 <img src="./Images/escalade-removebg-preview.png" alt="Car Icon">
@@ -29,7 +29,7 @@
             </div>
         </nav>
         <div class="user-greeting"></div>
-    </header>
+      </section>
 
     <main>
         <section class="hero">
@@ -84,15 +84,20 @@
         </section>
 
         <section class="abouts-us-section">
-            <div class="about-us">
-                <h1 style="text-align: center; color: darkblue; font-weight: 700; font-size: 2.25rem;">About Us</h1>
-                <p>Welcome to CORSA RENTALS, your trusted partner for hassle-free car rentals. With a commitment to quality service and a diverse fleet of well-maintained vehicles, we ensure a smooth and reliable travel experience. Whether you need a car for business, leisure, or long-term rentals, we offer flexible options at competitive rates. Our goal is to provide convenience, comfort, and excellent customer support to make every journey seamless. Rent with confidence and drive with ease!</p>
-                <h3>Explore the World, We'll back you!</h3>
-                <div class="Pic3"><img src="./Images/istockphoto-1138560072-612x612.jpg"></div>
-            </div>
-        </section>
+          <div class="about-us">
+              <div class="about-text">
+                  <h1 style="text-align: center; color: darkblue; font-weight: 700; font-size: 2.25rem; margin-bottom: 17px;">About Us</h1>
+                  <p>Welcome to CORSA RENTALS, your trusted partner for hassle-free car rentals. With a commitment to quality service and a diverse fleet of well-maintained vehicles, we ensure a smooth and reliable travel experience. Whether you need a car for business, leisure, or long-term rentals, we offer flexible options at competitive rates. Our goal is to provide convenience, comfort, and excellent customer support to make every journey seamless. Rent with confidence and drive with ease!</p>
+                  <h3>Explore the World, We'll back you!</h3>
+              </div>
+              <div class="Pic3">
+                  <img src="./Images/istockphoto-1138560072-612x612.jpg" alt="Car Keys">
+              </div>
+          </div>
+      </section>
+      
 
-        <section class="why choose-us">
+        <!-- <section class="why choose-us">
             <div class="choose-us">
                 <h2 style="font-weight: 700; font-size: 2.25rem; text-align: center;">Why Choose Us?</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -134,7 +139,111 @@
                     </div>
                   </div>
             </div>
-        </section>
+        </section> -->
+
+<section class="choose-us">
+    <h2 class="section-title">Why Choose Us?</h2>
+    <p class="section-subtitle">Experience the best car rental service with these benefits</p>
+    
+    <div class="choose-grid">
+        <div class="choose-item">
+            <div class="icon-container">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>100% Safe</h3>
+            <p>All our vehicles are regularly maintained and insured</p>
+        </div>
+
+        <div class="choose-item">
+            <div class="icon-container">
+                <i class="fas fa-headset"></i>
+            </div>
+            <h3>24/7 Support</h3>
+            <p>Round-the-clock customer service for your needs</p>
+        </div>
+
+        <div class="choose-item">
+            <div class="icon-container">
+                <i class="fas fa-dollar-sign"></i>
+            </div>
+            <h3>Best Price</h3>
+            <p>Competitive rates with no hidden charges</p>
+        </div>
+
+        <div class="choose-item">
+            <div class="icon-container">
+                <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <h3>Flexible Locations</h3>
+            <p>Pick-up and drop-off at your convenience</p>
+        </div>
+    </div>
+</section>
+
+<footer class="bg-gray-900 text-white py-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div>
+        <h3 class="text-xl font-bold mb-4">About Us</h3>
+        <p class="text-gray-400">
+          Premium car rental service providing luxury and comfort for your
+          journey.
+        </p>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+        <ul class="space-y-2">
+          <li>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">Cars</a>
+          </li>
+          <li>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">Services</a>
+          </li>
+          <li>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">About</a>
+          </li>
+          <li>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">Contact</a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold mb-4">Contact Us</h3>
+        <ul class="space-y-2">
+          <li class="flex items-center">
+            <i class="ri-map-pin-line mr-2"></i>
+            <span class="text-gray-400">123 Business Ave, New York, NY 10001</span>
+          </li>
+          <li class="flex items-center">
+            <i class="ri-phone-line mr-2"></i>
+            <span class="text-gray-400">+1 (555) 123-4567</span>
+          </li>
+          <li class="flex items-center">
+            <i class="ri-mail-line mr-2"></i>
+            <span class="text-gray-400">info@luxdrive.com</span>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold mb-4">Newsletter</h3>
+        <p class="text-gray-400 mb-4">
+          Subscribe to our newsletter for updates and special offers.
+        </p>
+        <form class="flex">
+          <input type="email" placeholder="Your email" class="flex-1 px-4 py-2 rounded-l border-none text-gray-900">
+          <button class="bg-primary px-4 py-2 !rounded-r-button hover:bg-primary/90 transition-colors whitespace-nowrap cursor-pointer">
+            Subscribe
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+      <p class="text-gray-400">
+        © 2025 LuxDrive. All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>
     </main>
 
     <script src="openingpagejs.js">
