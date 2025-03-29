@@ -11,10 +11,39 @@
             <h1>Book your Ride!</h1>
             <p>Please fill out the form below to confirm your Vehicle for Rent</p>
         </div>
-        <form>
-            <h1>
-                
-            </h1>
+        <form id="bookingForm" class="booking-form">
+            <div class="form-group">
+                <label for="pickup-location">Pickup Location</label>
+                <input type="text" id="pickup-location" placeholder="Enter pickup location" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="dropoff-location">Drop-off Location</label>
+                <input type="text" id="dropoff-location" placeholder="Enter drop-off location" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="pickup-date">Pickup Date</label>
+                <input type="date" id="pickup-date" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="return-date">Return Date</label>
+                <input type="date" id="return-date" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="car-type">Car Type</label>
+                <select id="car-type" required>
+                    <option value="">Select Car</option>
+                    <option value="sedan">Sedan</option>
+                    <option value="suv">SUV</option>
+                    <option value="luxury">Luxury</option>
+                    <option value="convertible">Convertible</option>
+                </select>
+            </div>
+    
+            <button type="submit" class="book-now-btn">Book Now</button>
         </form>
     </div>
 </body>
