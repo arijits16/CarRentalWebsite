@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Premium Car Rental</title>
+    <link rel="stylesheet" href="openingpagestyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Additional styles specific to the about us page */
+        .about-section {
+            padding: 60px 8%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .about-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .values-section {
+            padding: 60px 8%;
+            background-color: #f9f9f9;
+        }
+
+        .values-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .value-card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .value-card i {
+            font-size: 2.5rem;
+            color: #e1ad20;
+            margin-bottom: 15px;
+        }
+
+        .value-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .team-section {
+            padding: 60px 8%;
+        }
+
+        .team-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .team-member {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .team-member img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            aspect-ratio: 1/1;
+        }
+
+        .team-info {
+            padding: 20px;
+        }
+
+        .team-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .team-info p {
+            color: #777;
+            margin-bottom: 15px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: #555;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #4CAF50;
+        }
+
+        @media (max-width: 768px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-image {
+                order: -1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="./Images/escalade-removebg-preview.png" alt="Car Icon">
+                CORSA RENTALS
+            </div>
+
+            <div class="nav-links">
+                <a href="Opening page.html"><i class="fas fa-home"></i> Home</a>
+                <a href="Car page project.html"><i class="fas fa-car"></i> Cars</a>
+                <a href="aboutus.html"><i class="fas fa-tags"></i> About us</a>
+                <a href="faq.html"><i class="fas fa-question-circle"></i> FAQ</a>
+                <a href="terms.html"><i class="fas fa-file-contract"></i> Terms & Conditions</a>
+                <a href="feedbackform.html"><i class="fas fa-comment-dots"></i> Feedback</a>
+                <a href="#testimonials"><i class="fas fa-comment"></i> Testimonials</a>
+                <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+                <a href="#locations"><i class="fas fa-map-marker-alt"></i> Locations</a>
+                <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Login/Register</a>
+            </div>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+        <div class="user-greeting"></div>
+    </header>
+
+    <main>
+        <section class="about-section">
+            <div class="about-header">
+                <h1>About Premium Car Rental</h1>
+                <p>Experience luxury on wheels with a company that cares</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Our Story</h2>
+                    <p style="text-align: justify;">Founded in 2010, Premium Car Rental began with a simple vision: to provide exceptional luxury vehicles at competitive rates while delivering unmatched customer service. What started as a small fleet of five premium cars has now expanded to over 200 vehicles across multiple locations.</p>
+                    
+                    <p style="text-align: justify;">Our journey has been driven by our passion for automobiles and our commitment to creating memorable experiences for our customers. We understand that renting a car is more than just a transaction—it's about fulfilling dreams and making journeys special.</p>
+                    
+                    <p style="text-align: justify;">With over a decade of experience in the industry, we've built a reputation for reliability, transparency, and excellence. Our team of automotive enthusiasts and customer service experts work tirelessly to ensure that every aspect of your rental experience exceeds expectations.</p>
+                </div>
+                
+                <div class="about-image">
+                    <img src="./Images/dealership.avif" alt="Premium Car Rental Office">
+                </div>
+            </div>
+        </section>
+        
+        <section class="values-section">
+            <div class="values-header">
+                <h2>Our Core Values</h2>
+                <p>The principles that drive our business forward</p>
+            </div>
+            
+            <div class="values-grid">
+                <div class="value-card">
+                    <i class="fas fa-star"></i>
+                    <h3>Excellence</h3>
+                    <p>We strive for excellence in every aspect of our service, from vehicle maintenance to customer interactions.</p>
+                </div>
+                
+                <div class="value-card">
+                    <i class="fas fa-handshake"></i>
+                    <h3>Integrity</h3>
+                    <p>We believe in transparent pricing, honest communication, and ethical business practices.</p>
+                </div>
+                
+                <div class="value-card">
+                    <i class="fas fa-heart"></i>
+                    <h3>Passion</h3>
+                    <p>Our love for automobiles drives us to curate the best fleet and keep our vehicles in pristine condition.</p>
+                </div>
+                
+                <div class="value-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Customer Focus</h3>
+                    <p>We put our customers at the center of everything we do, tailoring our services to meet their unique needs.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="team-section">
+            <div class="team-header">
+                <h2>Meet Our Team</h2>
+                <p>The passionate individuals behind Premium Car Rental</p>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/300x300" alt="CEO">
+                    <div class="team-info">
+                        <h3>John Matthews</h3>
+                        <p>Founder & CEO</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/300x300" alt="Operations Manager">
+                    <div class="team-info">
+                        <h3>Sarah Johnson</h3>
+                        <p>Operations Manager</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/300x300" alt="Fleet Manager">
+                    <div class="team-info">
+                        <h3>Michael Chen</h3>
+                        <p>Fleet Manager</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/300x300" alt="Customer Service Lead">
+                    <div class="team-info">
+                        <h3>Emma Rodriguez</h3>
+                        <p>Customer Service Lead</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Premium Car Rental</h3>
+                <p>Luxury vehicles for any occasion. Experience the difference with our premium fleet and exceptional service.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Luxury Drive, Beverly Hills, CA 90210</p>
+                <p><i class="fas fa-phone"></i> (800) 123-4567</p>
+                <p><i class="fas fa-envelope"></i> info@premiumcarrental.com</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Premium Car Rental. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="openingpagejs.js"></script>
+</body>
+</html>

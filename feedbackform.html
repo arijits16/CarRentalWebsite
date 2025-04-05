@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Car Rental - Feedback</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        header {
+            background-color: #222;
+            color: white;
+            padding: 1rem 2rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #f1c40f;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #222;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .star-rating {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+        }
+
+        .star-rating input {
+            display: none;
+        }
+
+        .star-rating label {
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            margin: 0;
+            padding: 5px;
+            font-size: 30px;
+            color: #ddd;
+        }
+
+        .star-rating label:before {
+            content: '\f005';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+        }
+
+        .star-rating input:checked ~ label {
+            color: #f1c40f;
+        }
+
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: #f39c12;
+        }
+
+        button {
+            background-color: #f1c40f;
+            color: #333;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: block;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #f39c12;
+        }
+
+        .stats {
+            background-color: #eee;
+            border-radius: 5px;
+            padding: 1rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .stats h2 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            background-color: white;
+            border-radius: 5px;
+        }
+
+        .star-display {
+            color: #f1c40f;
+            font-size: 24px;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .container {
+                padding: 1rem;
+                margin: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-car"></i>
+                Premium Car Rental
+            </div>
+            <div class="nav-links">
+                <a href="Opening page.html"><i class="fas fa-home"></i> Home</a>
+                <a href="Car page project.html"><i class="fas fa-car"></i> Cars</a>
+                <a href="about.html"><i class="fas fa-tags"></i>About us</a>
+                <a href="#testimonials"><i class="fas fa-comment"></i> Testimonials</a>
+                <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+                <a href="#locations"><i class="fas fa-map-marker-alt"></i> Locations</a>
+                <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Customer Feedback Form</h1>
+        <form id="feedbackForm">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone" name="phone">
+            </div>
+
+            <div class="form-group">
+                <label for="car">Car Rented</label>
+                <input type="text" id="car" name="car" required>
+            </div>
+
+            <div class="form-group">
+                <label for="service">Service Type</label>
+                <select id="service" name="service" required>
+                    <option value="">-- Select Service --</option>
+                    <option value="Short-term Rental">Short-term Rental</option>
+                    <option value="Long-term Rental">Long-term Rental</option>
+                    <option value="Chauffeur Service">Chauffeur Service</option>
+                    <option value="Airport Transfer">Airport Transfer</option>
+                    <option value="Special Event">Special Event</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Overall Rating (1-10 stars)</label>
+                <div class="star-rating">
+                    <input type="radio" id="star10" name="rating" value="10">
+                    <label for="star10" title="10 stars"></label>
+                    <input type="radio" id="star9" name="rating" value="9">
+                    <label for="star9" title="9 stars"></label>
+                    <input type="radio" id="star8" name="rating" value="8">
+                    <label for="star8" title="8 stars"></label>
+                    <input type="radio" id="star7" name="rating" value="7">
+                    <label for="star7" title="7 stars"></label>
+                    <input type="radio" id="star6" name="rating" value="6">
+                    <label for="star6" title="6 stars"></label>
+                    <input type="radio" id="star5" name="rating" value="5">
+                    <label for="star5" title="5 stars"></label>
+                    <input type="radio" id="star4" name="rating" value="4">
+                    <label for="star4" title="4 stars"></label>
+                    <input type="radio" id="star3" name="rating" value="3">
+                    <label for="star3" title="3 stars"></label>
+                    <input type="radio" id="star2" name="rating" value="2">
+                    <label for="star2" title="2 stars"></label>
+                    <input type="radio" id="star1" name="rating" value="1">
+                    <label for="star1" title="1 star"></label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="comments">Additional Comments</label>
+                <textarea id="comments" name="comments"></textarea>
+            </div>
+
+            <button type="submit">Submit Feedback</button>
+        </form>
+
+        <div class="stats">
+            <h2>Feedback Statistics</h2>
+            <div class="stat-item">
+                <span>Total Feedback Submissions:</span>
+                <span id="submissionCount">0</span>
+            </div>
+            <div class="stat-item">
+                <span>Average Rating:</span>
+                <span id="averageRating">0.0</span>
+            </div>
+            <div class="star-display" id="averageStarDisplay"></div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize variables to track submissions and ratings
+        let submissionCount = 0;
+        let totalRating = 0;
+        let averageRating = 0;
+
+        // Load previous data from localStorage if available
+        window.onload = function() {
+            if (localStorage.getItem('submissionCount')) {
+                submissionCount = parseInt(localStorage.getItem('submissionCount'));
+                document.getElementById('submissionCount').textContent = submissionCount;
+            }
+            
+            if (localStorage.getItem('totalRating')) {
+                totalRating = parseFloat(localStorage.getItem('totalRating'));
+                if (submissionCount > 0) {
+                    averageRating = (totalRating / submissionCount).toFixed(1);
+                    document.getElementById('averageRating').textContent = averageRating;
+                    updateStarDisplay(averageRating);
+                }
+            }
+        };
+
+        // Handle form submission
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const rating = document.querySelector('input[name="rating"]:checked');
+            
+            // Validate form
+            if (!rating) {
+                alert("Please provide a rating before submitting.");
+                return;
+            }
+            
+            // Update counters
+            submissionCount++;
+            totalRating += parseInt(rating.value);
+            averageRating = (totalRating / submissionCount).toFixed(1);
+            
+            // Update display
+            document.getElementById('submissionCount').textContent = submissionCount;
+            document.getElementById('averageRating').textContent = averageRating;
+            updateStarDisplay(averageRating);
+            
+            // Save to localStorage
+            localStorage.setItem('submissionCount', submissionCount);
+            localStorage.setItem('totalRating', totalRating);
+            
+            // Show success message
+            alert(`Thank you, ${name}! Your feedback has been successfully submitted.`);
+            
+            // Reset form
+            this.reset();
+        });
+
+        // Function to update star display
+        function updateStarDisplay(rating) {
+            const starDisplay = document.getElementById('averageStarDisplay');
+            starDisplay.innerHTML = '';
+            
+            // Get whole and fractional parts
+            const wholeStars = Math.floor(rating);
+            const fraction = rating - wholeStars;
+            
+            // Add full stars
+            for (let i = 0; i < wholeStars; i++) {
+                starDisplay.innerHTML += '<i class="fas fa-star"></i> ';
+            }
+            
+            // Add partial star if needed
+            if (fraction >= 0.25 && fraction < 0.75) {
+                starDisplay.innerHTML += '<i class="fas fa-star-half-alt"></i> ';
+            } else if (fraction >= 0.75) {
+                starDisplay.innerHTML += '<i class="fas fa-star"></i> ';
+            }
+            
+            // Add empty stars to complete 10
+            const emptyStars = 10 - Math.ceil(rating);
+            for (let i = 0; i < emptyStars; i++) {
+                starDisplay.innerHTML += '<i class="far fa-star"></i> ';
+            }
+        }
+
+        // Logout function
+        function logout() {
+            alert("You have been logged out.");
+            // Redirect to login page or home page
+            // window.location.href = "login.html";
+        }
+    </script>
+</body>
+</html>

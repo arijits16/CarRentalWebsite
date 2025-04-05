@@ -56,9 +56,11 @@ nav {
 
 .nav-links a {
     text-decoration: none;
-    color: var(--secondary-color);
+    color: white;
     transition: color 0.3s ease;
 }
+
+
 
 .nav-links a:hover {
     color: var(--primary-color);
@@ -334,7 +336,129 @@ nav {
         align-items: center;
     }
 }
-
-footer {
-    background-color: #001762;
-}
+/*Footer Section*/
+.footer {
+    background-color: #1a1a1a;
+    color: #ccc;
+    padding: 50px 20px 30px;
+    font-size: 0.95rem;
+  }
+  
+  .footer-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  
+  .footer-grid {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+  
+  .footer-grid > div {
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  .footer h3 {
+    color: #fff;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    white-space: nowrap;
+  }
+  
+  .footer a {
+    color: #aaa;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .footer a:hover {
+    color: #fff;
+  }
+  
+  .footer p,
+  .footer span {
+    color: #bbb;
+    margin: 6px 0;
+    white-space: nowrap;
+  }
+  
+  .footer ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .footer .flex {
+    display: flex;
+    align-items: center;
+  }
+  
+  .footer .flex span {
+    margin-left: 8px;
+  }
+  
+  .footer form {
+    display: flex;
+    max-width: 300px;
+  }
+  
+  .footer form input[type="email"] {
+    padding: 10px 14px;
+    border: none;
+    outline: none;
+    border-radius: 6px 0 0 6px;
+    font-size: 0.95rem;
+    background-color: #f3f3f3;
+    color: #333;
+    flex: 1;
+  }
+  
+  .footer form button {
+    background-color: #ff6b35;
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 0 6px 6px 0;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .footer form button:hover {
+    background-color: #e65a2c;
+  }
+  
+  .footer-bottom {
+    border-top: 1px solid #333;
+    text-align: center;
+    padding-top: 20px;
+    font-size: 0.85rem;
+    color: #888;
+  }
+  
+  @media (max-width: 768px) {
+    .footer-grid {
+      flex-direction: column;
+    }
+  
+    .footer form {
+      max-width: 100%;
+      flex-direction: column;
+    }
+  
+    .footer form input[type="email"],
+    .footer form button {
+      border-radius: 6px;
+      margin-top: 10px;
+    }
+  }
+  
+  

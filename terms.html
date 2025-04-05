@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms and Conditions - Premium Car Rental</title>
+    <link rel="stylesheet" href="openingpagestyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Styles for terms and conditions page */
+        .terms-section {
+            padding: 60px 8%;
+        }
+
+        .terms-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .terms-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .terms-header p {
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .terms-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .terms-section h2 {
+            font-size: 1.8rem;
+            margin: 30px 0 15px;
+            color: #333;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .terms-section h3 {
+            font-size: 1.4rem;
+            margin: 25px 0 10px;
+            color: #444;
+        }
+
+        .terms-section p, .terms-section li {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .terms-section ul, .terms-section ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .terms-section li {
+            margin-bottom: 10px;
+        }
+
+        .last-updated {
+            text-align: right;
+            font-style: italic;
+            color: #777;
+            margin-top: 30px;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #4CAF50;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+        }
+        
+        .back-to-top:hover {
+            background-color: #3d8b40;
+        }
+
+        .table-of-contents {
+            background-color: #f9f9f9;
+            padding: 20px 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .table-of-contents h3 {
+            margin-top: 0;
+        }
+
+        .table-of-contents ul {
+            list-style-type: none;
+            padding-left: 10px;
+        }
+
+        .table-of-contents a {
+            color: #4CAF50;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .table-of-contents a:hover {
+            color: #3d8b40;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="C:\Users\Gaurav Chandrasekhar\Downloads\caricon (1).jpg" alt="Car Icon">
+                Premium Car Rental
+            </div>
+            <div class="nav-links">
+                <a href="Opening page.html"><i class="fas fa-home"></i> Home</a>
+                <a href="Car page project.html"><i class="fas fa-car"></i> Cars</a>
+                <a href="aboutus.html"><i class="fas fa-tags"></i>About us</a>
+                <a href="faq.html"><i class="fas fa-question-circle"></i> FAQ</a>
+                <a href="terms.html" class="active"><i class="fas fa-file-contract"></i> Terms & Conditions</a>
+                <a href="#testimonials"><i class="fas fa-comment"></i> Testimonials</a>
+                <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+                <a href="#locations"><i class="fas fa-map-marker-alt"></i> Locations</a>
+                <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+        <div class="user-greeting"></div>
+    </header>
+
+    <main>
+        <section class="terms-section">
+            <div class="terms-header">
+                <h1>Terms and Conditions</h1>
+                <p>Please read these terms and conditions carefully before using our services</p>
+            </div>
+            
+            <div class="terms-content">
+                <div class="table-of-contents">
+                    <h3>Table of Contents</h3>
+                    <ul>
+                        <li><a href="#agreement">1. Rental Agreement</a></li>
+                        <li><a href="#eligibility">2. Eligibility Requirements</a></li>
+                        <li><a href="#reservation">3. Reservation and Booking</a></li>
+                        <li><a href="#payments">4. Payments and Fees</a></li>
+                        <li><a href="#insurance">5. Insurance and Liability</a></li>
+                        <li><a href="#vehicle">6. Vehicle Use and Restrictions</a></li>
+                        <li><a href="#damage">7. Damage, Accidents, and Theft</a></li>
+                        <li><a href="#return">8. Vehicle Return</a></li>
+                        <li><a href="#cancellation">9. Cancellation and Modification</a></li>
+                        <li><a href="#privacy">10. Privacy Policy</a></li>
+                        <li><a href="#disputes">11. Dispute Resolution</a></li>
+                        <li><a href="#changes">12. Changes to Terms</a></li>
+                    </ul>
+                </div>
+                
+                <p>Welcome to Premium Car Rental. By accessing or using our services, you agree to be bound by these Terms and Conditions. Please read them carefully before making a reservation or using our services.</p>
+                
+                <h2 id="agreement">1. Rental Agreement</h2>
+                <p>1.1 These Terms and Conditions, together with your reservation confirmation and the rental agreement signed at the time of vehicle pickup, constitute the entire rental agreement ("Agreement") between you ("Renter") and Premium Car Rental ("Company").</p>
+                <p>1.2 In the event of any conflict between these Terms and Conditions and the rental agreement signed at pickup, the terms of the signed rental agreement shall prevail.</p>
+                
+                <h2 id="eligibility">2. Eligibility Requirements</h2>
+                <p>2.1 To rent a vehicle from Premium Car Rental, you must:</p>
+                <ul>
+                    <li>Be at least 25 years of age (30 years for luxury and specialty vehicles);</li>
+                    <li>Hold a valid driver's license issued at least 2 years prior to the rental date;</li>
+                    <li>Present a valid credit card in your name at the time of pickup;</li>
+                    <li>Meet our insurance requirements;</li>
+                    <li>Satisfy any additional requirements specified for specialty or luxury vehicles.</li>
+                </ul>
+                <p>2.2 The Company reserves the right to refuse service to anyone who does not meet our eligibility requirements or for any other lawful reason.</p>
+                
+                <h2 id="reservation">3. Reservation and Booking</h2>
+                <p>3.1 Reservations can be made online, by phone, or in person at our locations.</p>
+                <p>3.2 A reservation guarantees a vehicle of the selected category, not a specific make or model, unless expressly confirmed in writing.</p>
+                <p>3.3 All reservations are subject to vehicle availability. The Company will make reasonable efforts to accommodate your reservation but cannot guarantee availability in all circumstances.</p>
+                <p>3.4 The Company reserves the right to upgrade your vehicle at no additional cost if your reserved vehicle category is unavailable.</p>
+                
+                <h2 id="payments">4. Payments and Fees</h2>
+                <p>4.1 Payment for the full estimated rental charges is required at the time of pickup.</p>
+                <p>4.2 A security deposit, generally equivalent to the insurance deductible, will be authorized on your credit card and released upon satisfactory return of the vehicle.</p>
+                <p>4.3 Additional charges may include but are not limited to:</p>
+                <ul>
+                    <li>Fuel charges (if the vehicle is not returned with the same fuel level as at pickup);</li>
+                    <li>Late return fees;</li>
+                    <li>Traffic or parking violations incurred during the rental period;</li>
+                    <li>Toll fees;</li>
+                    <li>Cleaning fees (for excessive soiling or odors);</li>
+                    <li>Administration fees for processing violations or tolls;</li>
+                    <li>Additional driver fees;</li>
+                    <li>One-way rental fees;</li>
+                    <li>Young driver surcharges (if applicable).</li>
+                </ul>
+                <p>4.4 You authorize the Company to charge your credit card for any additional charges incurred during or after your rental period.</p>
+                
+                <h2 id="insurance">5. Insurance and Liability</h2>
+                <p>5.1 Basic insurance coverage is included in all rentals, covering:</p>
+                <ul>
+                    <li>Collision Damage Waiver (CDW) with a deductible;</li>
+                    <li>Third-party liability insurance up to the minimum required by law.</li>
+                </ul>
+                <p>5.2 Optional additional coverage may be purchased at the time of rental, including:</p>
+                <ul>
+                    <li>Super Collision Damage Waiver (reducing or eliminating the deductible);</li>
+                    <li>Personal Accident Insurance;</li>
+                    <li>Personal Effects Coverage;</li>
+                    <li>Supplementary Liability Insurance.</li>
+                </ul>
+                <p>5.3 Insurance coverage may be void if the vehicle is used in violation of these Terms and Conditions.</p>
+                
+                <h2 id="vehicle">6. Vehicle Use and Restrictions</h2>
+                <p>6.1 The vehicle may only be driven by authorized drivers listed on the rental agreement.</p>
+                <p>6.2 The vehicle may not be used:</p>
+                <ul>
+                    <li>For any illegal purpose;</li>
+                    <li>To transport persons or property for hire;</li>
+                    <li>To push or tow any vehicle or trailer;</li>
+                    <li>In any race, test, or competition;</li>
+                    <li>While the driver is under the influence of alcohol, drugs, or any other substance that impairs driving ability;</li>
+                    <li>Outside the geographic limitations specified in the rental agreement;</li>
+                    <li>On unpaved roads or in off-road conditions;</li>
+                    <li>To transport more passengers than the vehicle has seat belts;</li>
+                    <li>To transport hazardous materials or substances.</li>
+                </ul>
+                <p>6.3 The Renter is responsible for all parking, traffic violations, tolls, and other charges incurred during the rental period.</p>
+                
+                <h2 id="damage">7. Damage, Accidents, and Theft</h2>
+                <p>7.1 In the event of an accident, damage, or theft, the Renter must:</p>
+                <ul>
+                    <li>Immediately notify the police if there are injuries or significant damage;</li>
+                    <li>Obtain a police report when applicable;</li>
+                    <li>Not admit liability to third parties;</li>
+                    <li>Notify the Company as soon as possible, but no later than 24 hours after the incident;</li>
+                    <li>Complete an accident report form provided by the Company;</li>
+                    <li>Obtain contact and insurance information from all parties involved;</li>
+                    <li>Take photographs of the damage and accident scene if safe to do so.</li>
+                </ul>
+                <p>7.2 The Renter is responsible for the insurance deductible and any damages not covered by insurance.</p>
+                
+                <h2 id="return">8. Vehicle Return</h2>
+                <p>8.1 The vehicle must be returned to the agreed location on the date and time specified in the rental agreement.</p>
+                <p>8.2 Early returns do not entitle the Renter to a refund unless agreed in advance.</p>
+                <p>8.3 Late returns will incur additional charges as specified in the rental agreement.</p>
+                <p>8.4 The vehicle must be returned in the same condition as received, with the same fuel level, and free of personal belongings.</p>
+                <p>8.5 The Company is not responsible for personal items left in the vehicle.</p>
+                
+                <h2 id="cancellation">9. Cancellation and Modification</h2>
+                <p>9.1 Cancellation policies vary by vehicle category and booking type:</p>
+                <ul>
+                    <li>Standard reservations: Free cancellation up to 48 hours before pickup;</li>
+                    <li>Luxury and specialty vehicles: Free cancellation up to 72 hours before pickup;</li>
+                    <li>Prepaid or discounted reservations may have more restrictive cancellation policies as specified at booking.</li>
+                </ul>
+                <p>9.2 Modifications to reservations are subject to availability and may result in price adjustments.</p>
+                <p>9.3 No-shows will be charged a fee equivalent to one day's rental.</p>
+                
+                <h2 id="privacy">10. Privacy Policy</h2>
+                <p>10.1 The Company collects and processes personal information in accordance with our Privacy Policy, which is available on our website.</p>
+                <p>10.2 By using our services, you consent to the collection and processing of your personal information as described in our Privacy Policy.</p>
+                
+                <h2 id="disputes">11. Dispute Resolution</h2>
+                <p>11.1 Any dispute arising from or relating to this Agreement shall be resolved through the following process:</p>
+                <ul>
+                    <li>The parties will first attempt to resolve the dispute through direct negotiation;</li>
+                    <li>If negotiation fails, the dispute shall be submitted to mediation under the rules of the American Arbitration Association;</li>
+                    <li>If mediation is unsuccessful, the dispute shall be resolved through binding arbitration in accordance with the rules of the American Arbitration Association.</li>
+                </ul>
+                <p>11.2 This Agreement shall be governed by and construed in accordance with the laws of the State of California, without giving effect to any choice of law or conflict of law provisions.</p>
+                
+                <h2 id="changes">12. Changes to Terms</h2>
+                <p>12.1 The Company reserves the right to modify these Terms and Conditions at any time without prior notice.</p>
+                <p>12.2 The current version of the Terms and Conditions will be posted on our website, and the terms in effect at the time of your reservation will apply to your rental.</p>
+                
+                <div class="last-updated">Last Updated: March 29, 2025</div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Premium Car Rental</h3>
+                <p>Luxury vehicles for any occasion. Experience the difference with our premium fleet and exceptional service.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Luxury Drive, Beverly Hills, CA 90210</p>
+                <p><i class="fas fa-phone"></i> (800) 123-4567</p>
+                <p><i class="fas fa-envelope"></i> info@premiumcarrental.com</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Premium Car Rental. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+    <script src="openingpagejs.js"></script>
+    <script>
+        // Script for back to top button
+        const backToTopButton = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'flex';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+        
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Initialize back to top button visibility
+        backToTopButton.style.display = 'none';
+    </script>
+</body>
+</html>
