@@ -461,4 +461,22 @@ nav {
     }
   }
   
-  
+  .social-icons a {
+    transition: color 0.3s ease;
+    margin-right: 16px;
+    margin-top: 5px;
+    font-size: 22px;
+  }
+  .social-icons a:hover {
+    color: #24daf6; /* golden hover */
+  }
+
+  .social-icons a {
+    transition: color 0.3s ease;
+    margin-right: 16px;
+    margin-top: 5px;
+    font-size: 22px;
+  }
+  .social-icons a:hover {
+    color: #24daf6; /* golden hover */
+  }
