@@ -3,31 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms and Conditions - Premium Car Rental</title>
+    <title>Terms and Conditions - Corsa Rentals</title>
     <link rel="stylesheet" href="openingpagestyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Styles for terms and conditions page */
+        
         .terms-section {
             padding: 60px 8%;
-        }
-
-        .terms-header {
+            background-image: url('.//Images/gt3rsimg.jpg'); /* Change path to your background image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            margin-bottom: 40px;
         }
+        
+        .terms-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* dark overlay */
+            z-index: 0;
+    }
 
-        .terms-header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            color: #333;
-        }
+    .terms-section .terms-header {
+        position: relative;
+        z-index: 1;
+    }
 
-        .terms-header p {
-            color: #555;
-            max-width: 800px;
-            margin: 0 auto;
-        }
+    .terms-section .terms-header h1 {
+        font-size: 3rem;
+        margin-bottom: 10px;
+        color: white;
+        align-items: center;
+    }
+
+    .terms-section .terms-header p {
+        font-size: 1.2rem;
+        color: #eee;
+        align-items: center;
+    }
 
         .terms-content {
             max-width: 1000px;
@@ -125,29 +148,29 @@
 </head>
 
 <body>
-    <header>
+    <section>
         <nav>
             <div class="logo">
-                <img src="C:\Users\Gaurav Chandrasekhar\Downloads\caricon (1).jpg" alt="Car Icon">
-                Premium Car Rental
+                <img src=".//Images/escalade-removebg-preview.png" alt="Car Icon">
+                CORSA RENTALS
             </div>
             <div class="nav-links">
                 <a href="Opening page.html"><i class="fas fa-home"></i> Home</a>
                 <a href="Car page project.html"><i class="fas fa-car"></i> Cars</a>
-                <a href="aboutus.html"><i class="fas fa-tags"></i>About us</a>
+                <a href="about.html"><i class="fas fa-tags"></i>About us</a>
                 <a href="faq.html"><i class="fas fa-question-circle"></i> FAQ</a>
                 <a href="terms.html" class="active"><i class="fas fa-file-contract"></i> Terms & Conditions</a>
                 <a href="#testimonials"><i class="fas fa-comment"></i> Testimonials</a>
-                <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+                <a href="./contact.html"><i class="fas fa-envelope"></i> Contact</a>
                 <a href="#locations"><i class="fas fa-map-marker-alt"></i> Locations</a>
-                <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                <a href="./login copy.html" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Login/Register</a>
             </div>
             <div class="mobile-menu">
                 <i class="fas fa-bars"></i>
             </div>
         </nav>
         <div class="user-greeting"></div>
-    </header>
+    </section>
 
     <main>
         <section class="terms-section">
@@ -155,7 +178,8 @@
                 <h1>Terms and Conditions</h1>
                 <p>Please read these terms and conditions carefully before using our services</p>
             </div>
-            
+        </section>
+                   
             <div class="terms-content">
                 <div class="table-of-contents">
                     <h3>Table of Contents</h3>
@@ -298,34 +322,85 @@
         </section>
     </main>
     
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Premium Car Rental</h3>
-                <p>Luxury vehicles for any occasion. Experience the difference with our premium fleet and exceptional service.</p>
+    <footer class="footer">
+        <div class="footer-wrapper">
+          <div class="footer-grid">
+            <div>
+              <h3 class="text-xl font-bold mb-4">About Us</h3>
+              <p>Premium Car Rental Service </p>
+              <p>Explore the World, We'll Back you</p>
+              <div class="social-icons mt-4 flex gap-4">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+              </div>
             </div>
-            
-            <div class="footer-section">
-                <h3>Contact Us</h3>
-                <p><i class="fas fa-map-marker-alt"></i> 123 Luxury Drive, Beverly Hills, CA 90210</p>
-                <p><i class="fas fa-phone"></i> (800) 123-4567</p>
-                <p><i class="fas fa-envelope"></i> info@premiumcarrental.com</p>
+
+            <div>
+              <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+              <ul class="space-y-2">
+                <li>
+                  <a href="./about.html" class="text-gray-400 hover:text-white transition-colors">About Us</a>
+                </li>
+                <li>
+                  <a href="./Car page project.html" class="text-gray-400 hover:text-white transition-colors">Cars</a>
+                </li>
+                <li>
+                  <a href="./terms.html" class="text-gray-400 hover:text-white transition-colors">Terms & Conditions</a>
+                </li>
+                <li>
+                  <a href="./faq.html" class="text-gray-400 hover:text-white transition-colors">FAQs</a>
+                </li>
+                <li>
+                <a href="./contact.html" class="text-gray-400 hover:text-white transition-colors">Contact Us</a>
+                  </li>
+              </ul>
             </div>
-            
-            <div class="footer-section">
-                <h3>Follow Us</h3>
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                </div>
+            <div>
+                <h3 class="text-xl font-bold mb-4">Contact Us</h3>
+                <ul class="space-y-2">
+                  <li class="flex items-start gap-3">
+                    <i class="fas fa-map-marker-alt text-white mt-1" style="margin-right: 10px; margin-bottom: 95px; color: red; font-size: 20px;"></i>
+                    <div class="text-gray-400">
+                      <p>Amrita Vishwa Vidyapeetham,</p>
+                      <p>Ettimadai</p>
+                      <p>Coimbatore Pincode: 641112</p>
+                      <p>Tamil Nadu</p>
+                    </div>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <i class="fas fa-phone-alt text-white" style="color: greenyellow; font-size: 17px;"></i>
+                    <span class="text-gray-400">+91 98123 45622</span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <i class="fas fa-envelope text-white" style="color: orange; font-size: 17px; margin-right: 2px;"></i>
+                    <span class="text-gray-400">info@corsarentals.com</span>
+                  </li>
+                </ul>
+              </div>
+              
+            <div>
+              <h3 class="text-xl font-bold mb-4">Newsletter</h3>
+              <p class="text-gray-400 mb-4">
+                Subscribe to our newsletter for updates and special offers.
+              </p>
+              <form class="flex">
+                <input type="email" placeholder="Your email" class="flex-1 px-4 py-2 rounded-l border-none text-gray-900">
+                <button class="bg-primary px-4 py-2 !rounded-r-button hover:bg-primary/90 transition-colors whitespace-nowrap cursor-pointer">
+                  Subscribe
+                </button>
+              </form>
             </div>
+          </div>
+          <div class="footer-bottom">
+            <p class="text-gray-400">
+              © 2025 CORSA RENTALS. All rights reserved.
+            </p>
+          </div>
         </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2025 Premium Car Rental. All Rights Reserved.</p>
-        </div>
+
     </footer>
 
     <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
