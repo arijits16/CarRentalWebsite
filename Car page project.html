@@ -171,7 +171,7 @@
             display: block;
             width: 100%;
             padding: 10px;
-            background-color: #2ecc71;
+            background-color: #050451;
             color: white;
             border: none;
             border-radius: 5px;
@@ -655,41 +655,39 @@
         }
 
         function showCarDetails(event) {
-            const carId = parseInt(event.target.dataset.id);
-            const car = cars.find(c => c.id === carId);
+    const carId = parseInt(event.target.dataset.id);
+    const car = cars.find(c => c.id === carId);
 
-            modalCarDetails.innerHTML = `
-                <div class="modal-content-flex">
-                    <!-- Left: Car Details -->
-                    <div class="modal-info">
-                        <h2>${car.name}</h2>
-                        <h3>Car Specifications</h3>
-                        <p><strong>Transmission:</strong> ${car.details.transmission}</p>
-                        <p><strong>Fuel Type:</strong> ${car.details.fuel}</p>
-                        <p><strong>Seats:</strong> ${car.details.seats}</p>
-                        <p><strong>Engine:</strong> ${car.details.engine}</p>
+    modalCarDetails.innerHTML = `
+        <div class="modal-flex">
+            <!-- Left: Car Details -->
+            <div class="modal-info">
+                <h2>${car.name}</h2>
+                <h3>Car Specifications</h3>
+                <p><strong>Transmission:</strong> ${car.details.transmission}</p>
+                <p><strong>Fuel Type:</strong> ${car.details.fuel}</p>
+                <p><strong>Seats:</strong> ${car.details.seats}</p>
+                <p><strong>Engine:</strong> ${car.details.engine}</p>
 
-                        <h3>Features</h3>
-                        <ul>
-                        ${car.details.features.map(feature => `<li>${feature}</li>`).join('')}
-                        </ul>
+                <h3>Features</h3>
+                <ul>
+                ${car.details.features.map(feature => `<li>${feature}</li>`).join('')}
+                </ul>
 
-                        <p><strong>Price:</strong> $${car.price} per day</p>
+                <p><strong>Price:</strong> $${car.price} per day</p>
 
-                        <a href="booking.html" class="book-now-btn" style="display: inline-block; margin-top: 15px; background-color: #28d07d; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;">Book Now</a>
-                    </div>
+                <a href="booking.html" class="book-now-btn" style="display: inline-block; margin-top: 15px; background-color: #28d07d; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;">Book Now</a>
+            </div>
 
-                    <!-- Right: Car Image -->
-                    <div style="max-width:300px; max-height:400px; flex">
-                       <img src="images/${car.name.replace(/\s+/g, '_')}.jpg" alt="${car.name}" />
-                    </div>
-                </div>
-`;
+            <!-- Right: Car Image -->
+            <div class="modal-image">
+                <img src="./Images/${car.name.replace(/\s+/g, '_')}.jpg" alt="${car.name}" style="width: 400px; height: auto; max-height: 250px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            </div>
+        </div>
+    `;
 
-
-            carModal.style.display = 'block';
-        }
-
+    carModal.style.display = 'block';
+}
         closeBtn.onclick = () => {
             carModal.style.display = 'none';
         };
