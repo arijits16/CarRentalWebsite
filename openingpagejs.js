@@ -33,3 +33,42 @@ function logout() {
     localStorage.removeItem('currentUser');
     window.location.href = 'login.html';
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.car-card');
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+          observer.unobserve(entry.target); // Animate only once
+        }
+      });
+    }, {
+      threshold: 0.2 // 20% visible
+    });
+
+    cards.forEach(card => {
+      observer.observe(card);
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.car-card');
+    const features = document.querySelectorAll('.choose-item');
+  
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.2
+    });
+  
+    cards.forEach(card => observer.observe(card));
+    features.forEach(item => observer.observe(item));
+  });
+  

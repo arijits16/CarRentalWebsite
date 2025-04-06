@@ -1,0 +1,1337 @@
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2c3e50;
+    --white: #ffffff;
+    --text-color: #333;
+    --light-gray: #f4f6f7;
+    --accent-color: #ff6b35;
+    --hover-color: #2980b9;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+/* ANIMATION CLASSES */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInDown {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.fadeIn {
+    animation: fadeIn 1s ease forwards;
+}
+
+.slideInDown {
+    animation: slideInDown 0.8s ease forwards;
+}
+
+.slideInUp {
+    animation: slideInUp 0.8s ease forwards;
+}
+
+.slideInLeft {
+    animation: slideInLeft 0.8s ease forwards;
+}
+
+.slideInRight {
+    animation: slideInRight 0.8s ease forwards;
+}
+
+.floating {
+    animation: float 6s ease-in-out infinite;
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+/* General animation for scroll elements */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animate-on-scroll.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Header and Navigation */
+header {
+    position: fixed;
+    width: 100%;
+    background-color: var(--white);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    background-color: #001762;
+    height: 90px;
+    animation: slideInDown 0.5s ease forwards;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 2rem;
+    color: white;
+    font-style: italic;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.logo img {
+    width: 40px;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover img {
+    transform: rotate(10deg);
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.mobile-menu {
+    display: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.mobile-menu:hover {
+    transform: scale(1.1);
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    padding: 0 5%;
+    margin-top: 70px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    flex: 1;
+    padding-right: 50px;
+    animation: slideInLeft 1s ease forwards;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: var(--secondary-color);
+    /* Typewriter effect handled by JS */
+}
+
+.hero-content p {
+    margin-bottom: 15px;
+    color: var(--text-color);
+    animation: fadeIn 1.5s ease forwards;
+    animation-delay: 0.5s;
+    opacity: 0;
+}
+
+.hero-content p:nth-child(3) {
+    animation-delay: 0.8s;
+}
+
+.cta-button {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 1.5s ease forwards;
+    animation-delay: 1.2s;
+    opacity: 0;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: left 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: var(--hover-color);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cta-button:hover::before {
+    left: 100%;
+}
+
+.hero-image {
+    flex: 1;
+    animation: float 6s ease-in-out infinite;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.hero-image:hover img {
+    transform: scale(1.02);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Car Display Section */
+.car-display {
+    padding: 40px 0;
+}
+
+.car-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.car-card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.car-card.card-hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.car-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.4s ease;
+}
+
+.car-card:hover img {
+    transform: scale(1.05);
+}
+
+.car-card h3 {
+    margin: 10px 0;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.car-card:hover h3 {
+    color: var(--primary-color);
+}
+
+.car-card p {
+    color: darkblue;
+    font-weight: bold;
+}
+
+.rent-button {
+    background: darkblue;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.rent-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: left 0.3s ease;
+}
+
+.rent-button:hover {
+    background: #1e40af;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.rent-button:hover::before {
+    left: 100%;
+}
+
+.button-pulse {
+    animation: pulse 0.5s ease;
+}
+
+.more-cars-container {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.more-cars-button {
+    background: darkblue;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 25px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.more-cars-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: left 0.3s ease;
+}
+
+.more-cars-button:hover {
+    background: #1e40af;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.more-cars-button:hover::before {
+    left: 100%;
+}
+
+/* About Us Section */
+.about-us-section {
+    padding: 40px 0;
+}
+
+.about-us {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px;
+    margin-bottom: 15px;
+}
+
+.about-text {
+    flex: 1;
+}
+
+.about-text h1 {
+    margin-bottom: 17px;
+    transition: transform 0.3s ease;
+}
+
+.about-text h1:hover {
+    transform: translateY(-3px);
+}
+
+.about-text p {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    max-width: 1000%;
+    text-align: left;
+    margin-right: 15px;
+    transition: opacity 0.3s ease;
+}
+
+.about-text p:hover {
+    opacity: 0.9;
+}
+
+.about-text h3 {
+    margin-top: 20px;
+    color: var(--accent-color);
+    transition: transform 0.3s ease;
+}
+
+.about-text h3:hover {
+    transform: translateX(5px);
+}
+
+.Pic3 {
+    flex: 2;
+    max-width: 100%;
+}
+
+.Pic3 img {
+    max-width: 400px;
+    height: auto;
+    border-radius: 10px;
+    margin-top: 40px;
+    border-width: 5px;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.Pic3 img:hover {
+    transform: scale(1.05) rotate(2deg);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Why Choose Us Section */
+.choose-us {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #9bc8ff;
+    position: relative;
+    overflow: hidden;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 10px;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 3px;
+    background-color: var(--accent-color);
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+}
+
+.section-title:hover::after {
+    width: 100px;
+}
+
+.section-subtitle {
+    font-size: 1.2rem;
+    color: #000000;
+    margin-bottom: 30px;
+}
+
+.choose-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.choose-item {
+    text-align: center;
+    max-width: 250px;
+    transition: transform 0.4s ease;
+}
+
+.choose-item:hover {
+    transform: translateY(-10px);
+}
+
+.icon-container {
+    width: 80px;
+    height: 80px;
+    background-color: #e0ebff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    transition: all 0.5s ease;
+    margin-bottom: 15px;
+}
+
+.icon-container.icon-animate {
+    animation: popIn 0.6s ease forwards;
+}
+
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    70% {
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.icon-container:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background-color: #cce0ff;
+}
+
+.icon-container i {
+    font-size: 32px;
+    color: #003b8b;
+    transition: transform 0.3s ease;
+}
+
+.icon-container:hover i {
+    transform: scale(1.2);
+}
+
+.choose-item h3 {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-top: 15px;
+    transition: color 0.3s ease;
+}
+
+.choose-item:hover h3 {
+    color: var(--accent-color);
+}
+
+.choose-item p {
+    font-size: 1rem;
+    color: #000000;
+    transition: opacity 0.3s ease;
+}
+
+.choose-item:hover p {
+    opacity: 0.8;
+}
+
+/* Footer Section */
+.footer {
+    background-color: #1a1a1a;
+    color: #ccc;
+    padding: 50px 20px 30px;
+    font-size: 0.95rem;
+}
+
+.footer-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.footer-grid {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.footer-grid > div {
+    flex: 1;
+    min-width: 200px;
+    transition: transform 0.3s ease;
+}
+
+.footer-grid > div:hover {
+    transform: translateY(-5px);
+}
+
+.footer h3 {
+    color: #fff;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    white-space: nowrap;
+    position: relative;
+    display: inline-block;
+}
+
+.footer h3::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-color);
+    bottom: -5px;
+    left: 0;
+    transition: width 0.3s ease;
+}
+
+.footer-grid > div:hover h3::after {
+    width: 100%;
+}
+
+.footer a {
+    color: #aaa;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+}
+
+.footer a:hover {
+    color: #fff;
+    transform: translateX(5px);
+}
+
+.footer p,
+.footer span {
+    color: #bbb;
+    margin: 6px 0;
+    white-space: nowrap;
+    transition: color 0.3s ease;
+}
+
+.footer-grid > div:hover p,
+.footer-grid > div:hover span {
+    color: #ddd;
+}
+
+.footer ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.footer .flex {
+    display: flex;
+    align-items: center;
+}
+
+.footer .flex span {
+    margin-left: 8px;
+}
+
+.footer form {
+    display: flex;
+    max-width: 300px;
+}
+
+.footer form input[type="email"] {
+    padding: 10px 14px;
+    border: none;
+    outline: none;
+    border-radius: 6px 0 0 6px;
+    font-size: 0.95rem;
+    background-color: #f3f3f3;
+    color: #333;
+    flex: 1;
+    transition: all 0.3s ease;
+}
+
+.footer form input[type="email"]:focus {
+    box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.3);
+}
+
+.footer form button {
+    background-color: #ff6b35;
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 0 6px 6px 0;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer form button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.footer form button:hover {
+    background-color: #e65a2c;
+}
+
+.footer form button:hover::before {
+    left: 100%;
+}
+
+.footer-bottom {
+    border-top: 1px solid #333;
+    text-align: center;
+    padding-top: 20px;
+    font-size: 0.85rem;
+    color: #888;
+    transition: color 0.3s ease;
+}
+
+.footer-bottom:hover {
+    color: #aaa;
+}
+
+.social-icons a {
+    transition: all 0.3s ease;
+    margin-right: 16px;
+    margin-top: 5px;
+    font-size: 22px;
+    display: inline-block;
+}
+
+.social-icons a:hover {
+    color: #24daf6;
+    transform: scale(1.3) translateY(-3px);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 90px;
+        left: 0;
+        width: 100%;
+        background-color: #001762;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        z-index: 999;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: all 0.3s ease;
+    }
+
+    .nav-links.active {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .mobile-menu {
+        display: block;
+        font-size: 24px;
+        color: white;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        height: auto;
+        padding-top: 100px;
+        padding-bottom: 50px;
+    }
+
+    .hero-content {
+        padding-right: 0;
+        margin-bottom: 30px;
+    }
+
+    .hero-image img {
+        max-width: 100%;
+    }
+
+    .choose-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .about-us {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-us p {
+        max-width: 100%;
+        margin-right: 0;
+    }
+
+    .Pic3 img {
+        max-width: 100%;
+        margin-top: 20px;
+    }
+
+    .footer-grid {
+        flex-direction: column;
+    }
+
+    .footer form {
+        max-width: 100%;
+        flex-direction: column;
+    }
+
+    .footer form input[type="email"],
+    .footer form button {
+        border-radius: 6px;
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .choose-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* Additional animation styles to add to your CSS file */
+
+/* Ripple Effect for Buttons */
+.cta-button, .rent-button, .more-cars-button, .footer form button {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(0);
+    animation: rippleEffect 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes rippleEffect {
+    to {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+/* Text gradient animation for heading after typing */
+.text-gradient {
+    background: linear-gradient(90deg, #1e3a8a, #3b82f6, #1e3a8a);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: textGradient 3s linear infinite;
+}
+
+@keyframes textGradient {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+
+/* Typing cursor animation */
+.typing-word {
+    position: relative;
+}
+
+.typing-word::after {
+    content: '|';
+    position: absolute;
+    right: -8px;
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Page loading animation */
+body {
+    opacity: 0.8;
+    transition: opacity 0.5s ease;
+}
+
+body.page-loaded {
+    opacity: 1;
+}
+
+/* Mobile menu animation */
+.mobile-menu {
+    transition: transform 0.3s ease;
+}
+
+.mobile-menu.active {
+    transform: rotate(90deg);
+}
+
+/* Images hover zoom effect */
+.car-card img, .Pic3 img, .hero-image img {
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Enhanced shadow effects */
+.car-card.card-hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15), 0 5px 15px rgba(0, 20, 80, 0.1);
+}
+
+/* Enhanced color transitions */
+.rent-button:hover, .cta-button:hover, .more-cars-button:hover {
+    background: linear-gradient(45deg, #1e3a8a, #3b82f6);
+}
+
+/* Fixed animation timing issues */
+.fadeIn, .slideInDown, .slideInUp, .slideInLeft, .slideInRight {
+    animation-fill-mode: both;
+}
+
+/* Add subtle text shadow to important headings */
+.hero-content h1, .section-title {
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Image shimmer effect on hover */
+.car-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(30deg);
+    opacity: 0;
+    transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.car-card:hover::after {
+    transform: rotate(30deg) translate(50%, 50%);
+    opacity: 1;
+}
+
+/* Footer social icon enhanced hover */
+.social-icons a {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.social-icons a:hover {
+    transform: translateY(-8px) scale(1.2);
+    color: #3b82f6;
+}
+
+/* Button scale on active state */
+.cta-button:active, .rent-button:active, .more-cars-button:active {
+    transform: scale(0.95);
+}
+
+/* Enhanced scroll animation for sections */
+.car-display, .about-us-section, .choose-us {
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+/* Enhanced Animation Classes */
+@keyframes fadeInScale {
+    from { 
+        opacity: 0; 
+        transform: scale(0.95);
+    }
+    to { 
+        opacity: 1; 
+        transform: scale(1);
+    }
+}
+
+@keyframes shimmerEffect {
+    0% { 
+        background-position: -200% center; 
+    }
+    100% { 
+        background-position: 200% center; 
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.3);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+    70% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+}
+
+@keyframes rotateIn {
+    from {
+        transform: rotate(-15deg) scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: rotate(0) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes bgPan {
+    0% { background-position: 0% center; }
+    100% { background-position: 100% center; }
+}
+
+/* Apply these new animation classes */
+.fadeInScale {
+    animation: fadeInScale 0.7s ease-out forwards;
+}
+
+.shimmer {
+    background: linear-gradient(90deg, 
+        rgba(255,255,255,0) 0%, 
+        rgba(255,255,255,0.2) 50%, 
+        rgba(255,255,255,0) 100%);
+    background-size: 200% 100%;
+    animation: shimmerEffect 1.5s infinite linear;
+}
+
+.bounceIn {
+    animation: bounceIn 0.8s ease forwards;
+}
+
+.rotateIn {
+    animation: rotateIn 0.6s ease-out forwards;
+}
+
+/* Hero Section Enhancements */
+.hero {
+    background: linear-gradient(120deg, #e0f7fa, #bbdefb, #c8e6c9);
+    background-size: 200% 100%;
+    animation: bgPan 15s infinite alternate linear;
+}
+
+.hero-content h1 {
+    position: relative;
+    display: inline-block;
+}
+
+.hero-content h1::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: var(--accent-color);
+    animation: lineExpand 1.5s ease-out 1s forwards;
+}
+
+@keyframes lineExpand {
+    to { width: 100%; }
+}
+
+/* Car Card Enhanced Animations */
+.car-card {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                box-shadow 0.4s ease, 
+                background 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.car-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 80%);
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.4s ease, transform 0.6s ease;
+}
+
+.car-card:hover::before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.car-card h3 {
+    position: relative;
+    display: inline-block;
+}
+
+.car-card h3::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.car-card:hover h3::after {
+    width: 100%;
+}
+
+.rent-button {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                background 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+.rent-button:active {
+    transform: scale(0.95);
+}
+
+/* Interactive Why Choose Us Section */
+.choose-item {
+    position: relative;
+    padding: 20px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                box-shadow 0.4s ease;
+}
+
+.choose-item:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.icon-container {
+    position: relative;
+    z-index: 1;
+}
+
+.icon-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0, 59, 139, 0.2) 0%, rgba(0, 59, 139, 0) 70%);
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 0.5s ease;
+    z-index: -1;
+}
+
+.icon-container:hover::after {
+    transform: scale(1.8);
+}
+
+/* Footer Animation Enhancements */
+.footer-grid > div {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.footer form button {
+    overflow: hidden;
+}
+
+.footer form button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.footer form button:active::after {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+/* Logo Animation Enhancement */
+.logo {
+    position: relative;
+}
+
+.logo::before {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: width 0.4s ease;
+}
+
+.logo:hover::before {
+    width: 100%;
+}
+
+/* Navigation Enhancements */
+.nav-links a {
+    display: inline-block;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.nav-links a:hover {
+    transform: translateY(-3px);
+}
+
+/* Scroll-triggered section animations */
+.car-display, .about-us-section, .choose-us {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.car-display.animate, .about-us-section.animate, .choose-us.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Image hover enhancements */
+.car-card img {
+    filter: brightness(0.95);
+    transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+.car-card:hover img {
+    filter: brightness(1.05);
+}
+
+.Pic3 img {
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                box-shadow 0.5s ease;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    .hero-content, .hero-image {
+        opacity: 0;
+        animation: fadeIn 1s ease forwards;
+    }
+    
+    .hero-content {
+        animation-delay: 0.3s;
+    }
+    
+    .hero-image {
+        animation-delay: 0.6s;
+    }
+}

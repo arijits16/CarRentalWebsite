@@ -21,7 +21,7 @@
                 <a href="./about.html"><i class="fas fa-handshake"></i> About us</a>
                 <a href="./Testimonials.html"><i class="fas fa-comment"></i> Testimonials</a>
                 <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
-                <a href="#locations"><i class="fas fa-map-marker-alt"></i> Locations</a>
+                <!-- <a href="#locations"><i class="fas fa-map-marker-alt"></i> Locations</a> -->
                 <a href="./login copy.html" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Login/Register</a>
             </div>
             <div class="mobile-menu">
@@ -32,54 +32,58 @@
       </section>
 
     <main>        
-        <section class="hero">
-          <div class="hero-content">
-              <h1>Drive Your Dream Car Today</h1>
-              <p>Find the perfect car for your journey with our extensive fleet of premium vehicles!</p>
-              <p>Experience quality, comfort, and affordability in one place.</p>
-              <a href="Car page project.html"><button class="cta-button">Rent a Car Now</button></a>
-          </div>
-          <div class="hero-image">
-              <img src="./Images/peakpx.jpg" alt="HyperCar">
-          </div>
+      <section class="hero-section">
+        <!-- Replace 'video.mp4' with your actual video path -->
+        <video class="hero-video" autoplay muted loop playsinline>
+          <source src="./Images/homepage_vid.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+    
+        <div class="hero-content">
+          <h1 style="margin-bottom: 425px; color: white; align-items: center;">Drive Your Dream Car Today</h1>          
+        </div>
       </section>
       </div>
       
         <section>
             <div class="car-display">
-                <header></header><h1 style="text-align: center; color: darkblue; font-weight: bolder;">Some of our Exclusive Cars</h1>
+                <header></header><h1 style="text-align: center; color: darkblue; font-weight: bolder; font-size: 34px; margin-top: 10px; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Some of our Exclusive Cars</h1>
                 <div class="car-grid">
                     <div class="car-card">
-                        <img src="./Images/zw-mercedes-benz-s-class-hybrid-1.avif" alt="Lamborghini Huracan">
+                        <img src="./Images/Mercedes_S-CLASS.jpg" alt="S-class">
                         <h3>Mercedes S-Class S580</h3>
                         <p>$499/day</p>
-                        <button class="rent-button">Rent Now</button>
+                        <button class="rent-button" onclick="window.location.href='booking.html'">Rent Now</button>
+
                     </div>
     
                     <div class="car-card">
-                        <img src="./Images/4-2025-BMW-X5-Competition-front-view.webp" alt="Ferrari 488">
+                        <img src="./Images/BMW_X5.webp" alt="BMWX5">
                         <h3>BMW X5</h3>
                         <p>$529/day</p>
-                        <button class="rent-button">Rent Now</button>
+                        <button class="rent-button" onclick="window.location.href='booking.html'">Rent Now</button>
+
                     </div>
     
                     <div class="car-card">
-                        <img src="./Images/20240719125650_Panamera_GTS _4_.jpg" alt="Tesla Model S">
+                        <img src="./Images/Porsche_Panamera.jpg" alt="PANAMERA">
                         <h3>Porsche Panamera</h3>
                         <p>$199/day</p>
-                        <button class="rent-button">Rent Now</button>
+                        <button class="rent-button" onclick="window.location.href='booking.html'">Rent Now</button>
+
                     </div>
     
                     <div class="car-card">
                         <img src="./Images/front-left-side-47.avif" alt="Range Rover Sport">
                         <h3>Lexus LM 350h</h3>
                         <p>$299/day</p>
-                        <button class="rent-button">Rent Now</button>
+                        <button class="rent-button" onclick="window.location.href='booking.html'">Rent Now</button>
+
                     </div>
                 </div>
     
                 <div class="more-cars-container">
-                    <a href="Car page project.html"><button class="more-cars-button">More Cars</button></a>
+                    <a href="Car page project.html"><button class="more-cars-button" style="margin-top: 45px;">More Cars</button></a>
                 </div>
             </div>
         </section>
@@ -103,7 +107,7 @@
     <p class="section-subtitle">Experience the best car rental service with these benefits</p>
     
     <div class="choose-grid">
-        <div class="choose-item">
+        <div class="choose-item" style="--i:0;">
             <div class="icon-container">
                 <i class="fas fa-shield-alt"></i>
             </div>
@@ -111,7 +115,7 @@
             <p>All our vehicles are regularly maintained and insured</p>
         </div>
 
-        <div class="choose-item">
+        <div class="choose-item" style="--i:0;">
             <div class="icon-container">
                 <i class="fas fa-headset"></i>
             </div>
@@ -119,7 +123,7 @@
             <p>Round-the-clock customer service for your needs</p>
         </div>
 
-        <div class="choose-item">
+        <div class="choose-item" style="--i:0;">
             <div class="icon-container">
                 <i class="fas fa-dollar-sign"></i>
             </div>
@@ -127,7 +131,7 @@
             <p>Competitive rates with no hidden charges</p>
         </div>
 
-        <div class="choose-item">
+        <div class="choose-item" style="--i:0;">
             <div class="icon-container">
                 <i class="fas fa-map-marker-alt"></i>
             </div>
