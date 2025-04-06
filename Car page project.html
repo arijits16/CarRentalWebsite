@@ -280,7 +280,7 @@
                 <a href="Opening page.html"><i class="fas fa-home"></i> Home</a>
                 <a href="Car page project.html"><i class="fas fa-car"></i> Cars</a>
                 <a href="./about.html"><i class="fas fa-handshake"></i> About us</a>
-                <a href="#testimonials"><i class="fas fa-comment"></i> Testimonials</a>
+                <a href="./Testimonials.html"><i class="fas fa-comment"></i> Testimonials</a>
                 <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
                 <a href="#locations"><i class="fas fa-map-marker-alt"></i> Locations</a>
                 <a href="./login copy.html" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Login/Register</a>
@@ -608,6 +608,7 @@
                             <span>${car.category}</span>
                         </div>
                         <button class="info-btn" data-id="${car.id}">More Info</button>
+                        <div id="modalCarDetails"></div>    
                     </div>
                 `;
                 carGrid.appendChild(carCard);
