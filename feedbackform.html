@@ -19,7 +19,7 @@
         }
 
         header {
-            background-color: #222;
+            background-color: #001762 ;
             color: white;
             padding: 1rem 2rem;
         }
@@ -175,6 +175,13 @@
             margin-top: 10px;
         }
 
+        .error {
+            color: red;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -184,7 +191,7 @@
                 padding: 1rem;
                 margin: 1rem;
             }
-        }   
+        }
     </style>
 </head>
 
@@ -192,15 +199,16 @@
     <header>
         <nav>
             <div class="logo">
-                <img src=".//Images/escalade-removebg-preview.png"><I>CORSA RENTALS</I>
+                <img src="./Images/escalade-removebg-preview.png" alt="Car Icon">
+                CORSA RENTALS
             </div>
             <div class="nav-links">
                 <a href="Opening page.html"><i class="fas fa-home"></i> Home</a>
-                <a href="Car page project.html"><i class="fas fa-car"></i> Cars</a>
-                <a href="about.html"><i class="fas fa-tags"></i>About us</a>
-                <a href="#testimonials"><i class="fas fa-comment"></i> Testimonials</a>
-                <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
-                <a href="#locations"><i class="fas fa-map-marker-alt"></i> Locations</a>
+                <a href="./Car page project_final.html"><i class="fas fa-car"></i> Cars</a>
+                <a href="./about.html"><i class="fas fa-handshake"></i> About us</a>
+                <a href="./Testimonials.html"><i class="fas fa-comment"></i> Testimonials</a>
+                <a href="./contact.html"><i class="fas fa-envelope"></i> Contact</a>
+                
                 <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </div>
         </nav>
@@ -212,21 +220,25 @@
             <div class="form-group">
                 <label for="name">Full Name</label>
                 <input type="text" id="name" name="name" required>
+                <div id="nameError" class="error">Please enter a valid name</div>
             </div>
 
             <div class="form-group">
                 <label for="email">Email Address</label>
                 <input type="email" id="email" name="email" required>
+                <div id="emailError" class="error">Please enter a valid email address</div>
             </div>
 
             <div class="form-group">
                 <label for="phone">Phone Number</label>
                 <input type="text" id="phone" name="phone">
+                <div id="phoneError" class="error">Please enter a valid 10-digit Indian phone number</div>
             </div>
 
             <div class="form-group">
                 <label for="car">Car Rented</label>
                 <input type="text" id="car" name="car" required>
+                <div id="carError" class="error">Please enter the car model you rented</div>
             </div>
 
             <div class="form-group">
@@ -235,10 +247,8 @@
                     <option value="">-- Select Service --</option>
                     <option value="Short-term Rental">Short-term Rental</option>
                     <option value="Long-term Rental">Long-term Rental</option>
-                    <option value="Chauffeur Service">Chauffeur Service</option>
-                    <option value="Airport Transfer">Airport Transfer</option>
-                    <option value="Special Event">Special Event</option>
                 </select>
+                <div id="serviceError" class="error">Please select a service type</div>
             </div>
 
             <div class="form-group">
@@ -265,6 +275,7 @@
                     <input type="radio" id="star1" name="rating" value="1">
                     <label for="star1" title="1 star"></label>
                 </div>
+                <div id="ratingError" class="error">Please select a rating</div>
             </div>
 
             <div class="form-group">
@@ -295,15 +306,42 @@
         let totalRating = 0;
         let averageRating = 0;
 
-        // Load previous data from localStorage if available
+        // Use memory storage instead of localStorage for sandboxed environments
+        const memoryStorage = {
+            data: {},
+            getItem: function(key) {
+                return this.data[key] || null;
+            },
+            setItem: function(key, value) {
+                this.data[key] = String(value);
+            }
+        };
+
+        // Function to safely access storage
+        function getStorage() {
+            try {
+                // Test if localStorage is available
+                localStorage.setItem('test', 'test');
+                localStorage.removeItem('test');
+                return localStorage;
+            } catch (e) {
+                console.log('localStorage not available, using memory storage instead');
+                return memoryStorage;
+            }
+        }
+
+        // Get the appropriate storage method
+        const storage = getStorage();
+
+        // Load previous data from storage if available
         window.onload = function() {
-            if (localStorage.getItem('submissionCount')) {
-                submissionCount = parseInt(localStorage.getItem('submissionCount'));
+            if (storage.getItem('submissionCount')) {
+                submissionCount = parseInt(storage.getItem('submissionCount'));
                 document.getElementById('submissionCount').textContent = submissionCount;
             }
             
-            if (localStorage.getItem('totalRating')) {
-                totalRating = parseFloat(localStorage.getItem('totalRating'));
+            if (storage.getItem('totalRating')) {
+                totalRating = parseFloat(storage.getItem('totalRating'));
                 if (submissionCount > 0) {
                     averageRating = (totalRating / submissionCount).toFixed(1);
                     document.getElementById('averageRating').textContent = averageRating;
@@ -318,11 +356,49 @@
             
             // Get form values
             const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const car = document.getElementById('car').value;
+            const service = document.getElementById('service').value;
             const rating = document.querySelector('input[name="rating"]:checked');
             
+            // Reset error messages
+            document.querySelectorAll('.error').forEach(el => el.style.display = 'none');
+            
             // Validate form
+            let isValid = true;
+            
+            if (!name) {
+                document.getElementById('nameError').style.display = 'block';
+                isValid = false;
+            }
+            
+            if (!email) {
+                document.getElementById('emailError').style.display = 'block';
+                isValid = false;
+            }
+            
+            if (phone && phone.length > 0 && !(/^[6-9]\d{9}$/.test(phone) || /^\+91[6-9]\d{9}$/.test(phone))) {
+                document.getElementById('phoneError').style.display = 'block';
+                isValid = false;
+            }
+            
+            if (!car) {
+                document.getElementById('carError').style.display = 'block';
+                isValid = false;
+            }
+            
+            if (!service) {
+                document.getElementById('serviceError').style.display = 'block';
+                isValid = false;
+            }
+            
             if (!rating) {
-                alert("Please provide a rating before submitting.");
+                document.getElementById('ratingError').style.display = 'block';
+                isValid = false;
+            }
+            
+            if (!isValid) {
                 return;
             }
             
@@ -336,9 +412,13 @@
             document.getElementById('averageRating').textContent = averageRating;
             updateStarDisplay(averageRating);
             
-            // Save to localStorage
-            localStorage.setItem('submissionCount', submissionCount);
-            localStorage.setItem('totalRating', totalRating);
+            // Save to storage
+            try {
+                storage.setItem('submissionCount', submissionCount);
+                storage.setItem('totalRating', totalRating);
+            } catch (e) {
+                console.log('Error saving to storage:', e);
+            }
             
             // Show success message
             alert(`Thank you, ${name}! Your feedback has been successfully submitted.`);

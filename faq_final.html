@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Premium Car Rental</title>
+    <link rel="stylesheet" href="openingpagestyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Additional styles specific to the FAQ page */
+        .faq-section {
+            padding: 100px 8%;
+            background-image: url('.//Images/chironSSGoldenEra.jpg'); /* Change path to your background image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .faq-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* background-color: rgba(0, 0, 0, 0.5); dark overlay */
+            z-index: 0;
+        }
+
+        .faq-section .faq-header {
+        position: relative;
+        z-index: 1;
+    }
+
+    .faq-section .faq-header h1 {
+        font-size: 3rem;
+        margin-bottom: 10px;
+        color: white;
+    }
+
+    .faq-section .faq-header p {
+        font-size: 1.2rem;
+        color: #eee;
+    }
+
+        .faq-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .category-btn {
+            padding: 10px 20px;
+            background-color: #f5f5f5;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .category-btn:hover, .category-btn.active {
+            background-color: #1118d3;
+            color: white;
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .faq-question {
+            padding: 20px;
+            background-color: #fff;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background-color: #f9f9f9;
+        }
+
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background-color: #f9f9f9;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .faq-item.active .faq-question {
+            background-color: #f5f5f5;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 500px;
+        }
+
+        .contact-box {
+            margin-top: 60px;
+            text-align: center;
+            padding: 30px;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+        }
+
+        .contact-box h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .contact-box p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: #00007a;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background-color: #2905cc;
+        }
+
+        @media (max-width: 768px) {
+            .faq-question {
+                padding: 15px;
+                font-size: 14px;
+            }
+
+            .faq-answer {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="./Images/escalade-removebg-preview.png" alt="Car Icon">
+                CORSA RENTALS
+            </div>
+            <div class="nav-links">
+                <a href="./Opening page.html"><i class="fas fa-home"></i> Home</a>
+                <a href="/Car page project_final.html"><i class="fas fa-car"></i> Cars</a>
+                <a href="./about.html"><i class="fas fa-handshake"></i> About us</a>
+                <a href="./faq_final.html"><i class="fas fa-question-circle"></i> FAQ</a>
+                <a href="./terms.html"><i class="fas fa-file-contract"></i> Terms & Conditions</a>
+                <a href="./Testimonials.html"><i class="fas fa-comment"></i> Testimonials</a>
+                <a href="./contact.html"><i class="fas fa-envelope"></i> Contact</a>
+                <a href="./login.html" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+        <div class="user-greeting"></div>
+    </header>
+
+    <main>
+        <section class="faq-section">
+            <div class="faq-header">
+               <h1>Frequently Asked Questions</h1>
+                <p>Clear your doubts here!</p>
+            </div>
+        </section>
+        
+        <section>
+            <br/>
+            <br/>
+            <div class="faq-categories">
+                <button class="category-btn active">All</button>
+                <button class="category-btn">Reservations</button>
+                <button class="category-btn">Pricing</button>
+                <button class="category-btn">Vehicle Options</button>
+                <button class="category-btn">Insurance & Coverage</button>
+                <button class="category-btn">Policies</button>
+            </div>
+            
+            <div class="faq-container">
+                <!-- Reservation FAQs -->
+                <div class="faq-item" data-category="Reservations">
+                    <div class="faq-question">
+                        How do I make a reservation?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can make a reservation online through our website, by calling our customer service at (800) 123-4567, or by visiting one of our locations in person. For online reservations, simply navigate to the "Cars" page, select your desired vehicle, choose your rental dates, and complete the booking process.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="Reservations">
+                    <div class="faq-question">
+                        What documents do I need to rent a car?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To rent a car, you will need:</p>
+                        <ul>
+                            <li>A valid driver's license (held for at least 1 year)</li>
+                            <li>A major credit card in your name</li>
+                            <li>Proof of insurance</li>
+                            <li>A valid ID or passport (for non-US residents)</li>
+                        </ul>
+                        <p>For luxury or high-end vehicles, additional documentation or higher age requirements may apply.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="Reservations">
+                    <div class="faq-question">
+                        Can I modify or cancel my reservation?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, you can modify or cancel your reservation by logging into your account on our website or by contacting our customer service. Modifications and cancellations made at least 48 hours before the scheduled pickup time are free of charge. Late cancellations or no-shows may incur a fee of up to one day's rental cost.</p>
+                    </div>
+                </div>
+                
+                <!-- Pricing FAQs -->
+                <div class="faq-item" data-category="Pricing">
+                    <div class="faq-question">
+                        What is included in the rental price?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our standard rental price includes:</p>
+                        <ul>
+                            <li>The vehicle rental for the specified period</li>
+                            <li>Standard liability insurance</li>
+                            <li>24/7 roadside assistance</li>
+                            <li>Unlimited mileage (for most vehicles)</li>
+                        </ul>
+                        <p>Additional services such as premium insurance coverage, GPS navigation, child seats, and additional drivers are available for an extra fee.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="Pricing">
+                    <div class="faq-question">
+                        Are there any hidden fees?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We pride ourselves on transparent pricing. All mandatory fees are included in your quoted price. Additional fees may apply for:</p>
+                        <ul>
+                            <li>Late returns (charged hourly after a 30-minute grace period)</li>
+                            <li>Fuel replacement (if the vehicle is not returned with the same fuel level)</li>
+                            <li>Excessive cleaning (if the vehicle requires special cleaning)</li>
+                            <li>Traffic or parking violations</li>
+                            <li>Damage repairs not covered by insurance</li>
+                        </ul>
+                        <p>All potential fees are clearly outlined in your rental agreement.</p>
+                    </div>
+                </div>
+                
+                <!-- Vehicle Options FAQs -->
+                <div class="faq-item" data-category="Vehicle Options">
+                    <div class="faq-question">
+                        What types of vehicles do you offer?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our premium fleet includes a wide range of vehicles to suit your needs:</p>
+                        <ul>
+                            <li>Luxury Sedans (Mercedes-Benz, BMW, Audi)</li>
+                            <li>Sports Cars (Porsche, Maserati, Jaguar)</li>
+                            <li>SUVs (Range Rover, Cadillac Escalade, BMW X7)</li>
+                            <li>Convertibles (Mercedes-Benz, BMW, Audi)</li>
+                            <li>Executive Vans (Mercedes-Benz V-Class)</li>
+                            <li>Electric Vehicles (Tesla, Audi e-tron)</li>
+                        </ul>
+                        <p>Visit our "Cars" page to see our complete selection with detailed specifications and availability.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="Vehicle Options">
+                    <div class="faq-question">
+                        Can I request a specific vehicle model?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, at Premium Car Rental, we offer model-specific reservations. When you book with us, you're guaranteed the exact make and model of the vehicle you select, not just a vehicle class. This ensures you get precisely the driving experience you desire.</p>
+                    </div>
+                </div>
+                
+                <!-- Insurance FAQs -->
+                <div class="faq-item" data-category="Insurance & Coverage">
+                    <div class="faq-question">
+                        What insurance options do you offer?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer several insurance options to protect you during your rental:</p>
+                        <ul>
+                            <li><strong>Standard Coverage (included):</strong> Provides basic liability protection</li>
+                            <li><strong>Premium Coverage:</strong> Reduces your deductible and adds comprehensive protection</li>
+                            <li><strong>Full Coverage:</strong> Eliminates your deductible entirely and provides maximum protection</li>
+                            <li><strong>Personal Effects Coverage:</strong> Protects your belongings inside the vehicle</li>
+                        </ul>
+                        <p>Our staff can help you select the best coverage for your needs at pickup.</p>
+                    </div>
+                </div>
+                
+                <!-- Policies FAQs -->
+                <div class="faq-item" data-category="Policies">
+                    <div class="faq-question">
+                        What is your fuel policy?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We operate on a "full-to-full" fuel policy. This means your vehicle will be provided with a full tank of fuel, and you're expected to return it with a full tank. If the vehicle is returned with less fuel than at pickup, a refueling charge will apply, which includes the cost of the missing fuel plus a service fee.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="Policies">
+                    <div class="faq-question">
+                        What is your age requirement for renting?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our standard minimum age requirement is 25 years for most vehicles. Drivers between 21-24 years may be eligible to rent certain vehicle categories with an additional young driver surcharge. For high-performance and luxury vehicles, the minimum age requirement is 30 years. All drivers must have held a valid driver's license for at least one year.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="Policies">
+                    <div class="faq-question">
+                        Can I take the rental car across state lines or into another country?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Travel within the contiguous United States is generally permitted with our vehicles. However, if you plan to travel to certain states or into Canada or Mexico, you must inform us at the time of reservation. Additional fees and special insurance may be required for international travel. Some high-end vehicles may have geographical restrictions due to insurance and security considerations.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-box">
+                <h3>Still Have Questions?</h3>
+                <p>Our customer service team is ready to assist you with any questions or concerns not addressed above.</p>
+                <a href="/contact.html" class="contact-btn">Contact Us</a>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <div class="footer-wrapper">
+          <div class="footer-grid">
+            <div>
+              <h3 class="text-xl font-bold mb-4">About Us</h3>
+              <p>Premium Car Rental Service </p>
+              <p>Explore the World, We'll Back you</p>
+              <div class="social-icons mt-4 flex gap-4">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+              <ul class="space-y-2">
+                <li>
+                  <a href="./about.html" class="text-gray-400 hover:text-white transition-colors">About Us</a>
+                </li>
+                <li>
+                  <a href="./Car page project_final.html" class="text-gray-400 hover:text-white transition-colors">Cars</a>
+                </li>
+                <li>
+                  <a href="./terms.html" class="text-gray-400 hover:text-white transition-colors">Terms & Conditions</a>
+                </li>
+                <li>
+                  <a href="./faq_final.html" class="text-gray-400 hover:text-white transition-colors">FAQs</a>
+                </li>
+                <li>
+                <a href="./contact.html" class="text-gray-400 hover:text-white transition-colors">Contact Us</a>
+                  </li>
+              </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold mb-4">Contact Us</h3>
+                <ul class="space-y-2">
+                  <li class="flex items-start gap-3">
+                    <i class="fas fa-map-marker-alt text-white mt-1" style="margin-right: 10px; margin-bottom: 95px; color: red; font-size: 20px;"></i>
+                    <div class="text-gray-400">
+                      <p>Amrita Vishwa Vidyapeetham,</p>
+                      <p>Ettimadai</p>
+                      <p>Coimbatore Pincode: 641112</p>
+                      <p>Tamil Nadu</p>
+                    </div>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <i class="fas fa-phone-alt text-white" style="color: greenyellow; font-size: 17px;"></i>
+                    <span class="text-gray-400">+91 98123 45622</span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <i class="fas fa-envelope text-white" style="color: orange; font-size: 17px; margin-right: 2px;"></i>
+                    <span class="text-gray-400">info@corsarentals.com</span>
+                  </li>
+                </ul>
+              </div>
+              
+            <div>
+              <h3 class="text-xl font-bold mb-4">Newsletter</h3>
+              <p class="text-gray-400 mb-4">
+                Subscribe to our newsletter for updates and special offers.
+              </p>
+              <form class="flex">
+                <input type="email" placeholder="Your email" class="flex-1 px-4 py-2 rounded-l border-none text-gray-900">
+                <button class="bg-primary px-4 py-2 !rounded-r-button hover:bg-primary/90 transition-colors whitespace-nowrap cursor-pointer">
+                  Subscribe
+                </button>
+              </form>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <p class="text-gray-400">
+              © 2025 CORSA RENTALS. All rights reserved.
+            </p>
+          </div>
+        </div>
+
+    </footer>
+
+    <script src="openingpagejs.js"></script>
+    <script>
+        // JavaScript for FAQ accordion functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Toggle active class on the clicked item
+                    item.classList.toggle('active');
+                    
+                    // Close other open items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                });
+            });
+            
+            // Category filter functionality
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    categoryButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    // Get the selected category
+                    const selectedCategory = button.textContent.trim();
+                    
+                    // Show/hide FAQ items based on category
+                    faqItems.forEach(item => {
+                        if (selectedCategory === 'All') {
+                            item.style.display = 'block';
+                        } else {
+                            const itemCategory = item.getAttribute('data-category');
+                            if (itemCategory === selectedCategory) {
+                                item.style.display = 'block';
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

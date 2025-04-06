@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CORSA RENTALS - Quick Booking</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #FF9933;
+            --secondary-color: #138808;
+            --accent-color: #000080;
+            --white: #ffffff;
+            --text-color: #333;
+            --light-gray: #f8f8f8;
+            --error-color: #d32f2f;
+            --success-color: #388e3c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-gray);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            background-color: var(--accent-color);
+            height: 70px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.8rem;
+            color: white;
+        }
+        
+        .logo img {
+            width: 40px;
+            margin-right: 10px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            margin-bottom: 5px;
+        }
+        
+        .card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        
+        h2 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(255, 153, 51, 0.2);
+        }
+        
+        .error-text {
+            color: var(--error-color);
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        input.error, textarea.error, select.error {
+            border-color: var(--error-color);
+        }
+        
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .form-col {
+            flex: 1;
+        }
+        
+        .price-box {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+        
+        .submit-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background-color: #0C6E06;
+        }
+        
+        .terms-check {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .terms-check input {
+            margin-top: 5px;
+            width: auto;
+        }
+        
+        /* Booking summary styles */
+        #booking-summary {
+            display: none;
+        }
+        
+        .summary-header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .booking-id {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 1.1rem;
+            margin-top: 10px;
+            display: inline-block;
+        }
+        
+        .summary-content {
+            padding: 20px;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+        
+        .summary-label {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+        
+        .summary-action {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .print-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        
+        .done-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        /* Loading spinner */
+        .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+        }
+        
+        .loader-text {
+            color: white;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        @media screen and (max-width: 600px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <img src="/Images/escalade-removebg-preview.png" alt="Corsa Icon">
+            <i>CORSA RENTALS</i>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>Quick Booking</h1>
+            <p>Pay ₹10,000 advance to secure your booking</p>
+        </div>
+
+        <form id="booking-form">
+            <div class="card">
+                <h2>Contact Information</h2>
+                
+                <div class="input-group">
+                    <label for="name">Full Name*</label>
+                    <input type="text" id="name" placeholder="Enter your full name">
+                    <div class="error-text" id="name-error">Please enter your full name</div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="phone">Mobile Number*</label>
+                    <input type="tel" id="phone" placeholder="Enter 10-digit number">
+                    <div class="error-text" id="phone-error">Please enter a valid 10-digit mobile number</div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="email">Email Address*</label>
+                    <input type="email" id="email" placeholder="your@email.com">
+                    <div class="error-text" id="email-error">Please enter a valid email address</div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="address">Complete Address*</label>
+                    <textarea id="address" placeholder="Enter your full address with landmark"></textarea>
+                    <div class="error-text" id="address-error">Please enter your complete address</div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="id-proof">ID Proof Type*</label>
+                    <select id="id-proof">
+                        <option value="">Select ID Type</option>
+                        <option value="aadhar">Aadhar Card</option>
+                        <option value="pan">PAN Card</option>
+                        <option value="driving">Driving License</option>
+                        <option value="passport">Passport</option>
+                    </select>
+                    <div class="error-text" id="id-proof-error">Please select an ID proof type</div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="id-number">ID Number*</label>
+                    <input type="text" id="id-number" placeholder="Enter your ID number">
+                    <div class="error-text" id="id-number-error">Please enter a valid ID number</div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>Booking Details</h2>
+                
+                <div class="price-box">
+                    <p>Advance Payment Amount</p>
+                    <div class="price">₹10,000</div>
+                    <p>This amount will be deducted from your final payment</p>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="input-group">
+                            <label for="pickup-date">Pickup Date*</label>
+                            <input type="date" id="pickup-date">
+                            <div class="error-text" id="pickup-date-error">Please select a pickup date</div>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="input-group">
+                            <label for="pickup-time">Pickup Time*</label>
+                            <input type="time" id="pickup-time">
+                            <div class="error-text" id="pickup-time-error">Please select a pickup time</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="input-group">
+                            <label for="drop-date">Drop Date*</label>
+                            <input type="date" id="drop-date">
+                            <div class="error-text" id="drop-date-error">Please select a drop date</div>
+                        </div>
+                    </div>
+
+                    <div class="form-col">
+                        <div class="input-group">
+                            <label for="drop-time">Drop Time*</label>
+                            <input type="time" id="drop-time">
+                            <div class="error-text" id="drop-time-error">Please select a drop time</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="pickup-location">Pickup Location*</label>
+                    <select id="pickup-location">
+                        <option value="">Select Location</option>
+                        <option value="airport">Coimbatore Airport</option>
+                        <option value="station">Coimbatore Railway Station</option>
+                        <option value="office">Our Office - Gandhipuram</option>
+                        <option value="custom">Custom Location (Extra Charges)</option>
+                    </select>
+                    <div class="error-text" id="pickup-location-error">Please select a pickup location</div>
+                </div>
+                
+                <div class="terms-check">
+                    <input type="checkbox" id="terms">
+                    <label for="terms">I agree to the Terms & Conditions and confirm I am over 21 years old with a valid driving license.</label>
+                    <div class="error-text" id="terms-error">You must accept the terms and conditions</div>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="payment-btn">Pay ₹10,000 Advance</button>
+            </div>
+        </form>
+
+        <!-- Booking Summary (Hidden Initially) -->
+        <div class="card" id="booking-summary">
+            <div class="summary-header">
+                <h2>Booking Confirmed!</h2>
+                <div class="booking-id" id="booking-id">CORSA25040600123</div>
+            </div>
+            <div class="summary-content">
+                <h3>Booking Summary</h3>
+                
+                <div class="summary-item">
+                    <span class="summary-label">Customer Name:</span>
+                    <span id="summary-name"></span>
+                </div>
+                
+                <div class="summary-item">
+                    <span class="summary-label">Mobile:</span>
+                    <span id="summary-phone"></span>
+                </div>
+                
+                <div class="summary-item">
+                    <span class="summary-label">Email:</span>
+                    <span id="summary-email"></span>
+                </div>
+                
+                <div class="summary-item">
+                    <span class="summary-label">Address:</span>
+                    <span id="summary-address"></span>
+                </div>
+                
+                <div class="summary-item">
+                    <span class="summary-label">ID Proof:</span>
+                    <span id="summary-id"></span>
+                </div>
+                
+                <div class="summary-item">
+                    <span class="summary-label">Pickup Date & Time:</span>
+                    <span id="summary-datetime"></span>
+                </div>
+                
+                <div class="summary-item">
+                    <span class="summary-label">Pickup Location:</span>
+                    <span id="summary-location"></span>
+                </div>
+                
+                <div class="summary-item">
+                    <span class="summary-label">Advance Paid:</span>
+                    <span>₹10,000</span>
+                </div>
+                
+                <div class="summary-item">
+                    <span class="summary-label">Payment Status:</span>
+                    <span style="color: var(--success-color); font-weight: bold;">COMPLETED</span>
+                </div>
+                
+                <div class="summary-action">
+                    <button class="print-btn" onclick="window.print()"><i class="fas fa-print"></i> Print</button>
+                    <button class="done-btn" onclick="window.location.href='Opening page.html'">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="loader-container" id="loader">
+        <div style="text-align: center;">
+            <div class="loader"></div>
+            <div class="loader-text">Processing payment...</div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2025 CORSA RENTALS. All rights reserved.</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const bookingForm = document.getElementById('booking-form');
+            const bookingSummary = document.getElementById('booking-summary');
+            const loader = document.getElementById('loader');
+        
+            // Mapping values
+            const locationNames = {
+                'airport': 'Coimbatore Airport',
+                'station': 'Coimbatore Railway Station',
+                'office': 'Our Office - Gandhipuram',
+                'custom': 'Custom Location'
+            };
+        
+            const idProofNames = {
+                'aadhar': 'Aadhar Card',
+                'pan': 'PAN Card',
+                'driving': 'Driving License',
+                'passport': 'Passport'
+            };
+        
+            // Utility functions
+            function generateBookingID() {
+                const date = new Date();
+                const year = date.getFullYear().toString().slice(-2);
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                const random = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+                return `CORSA${year}${month}${day}${random}`;
+            }
+        
+            function isValidEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(String(email).toLowerCase());
+            }
+        
+            function isValidPhone(phone) {
+                const re = /^[0-9]{10}$/;
+                return re.test(phone);
+            }
+        
+            function isValidID(type, number) {
+                if (!type || !number) return false;
+                switch (type) {
+                    case 'aadhar':
+                        return /^[0-9]{12}$/.test(number);
+                    case 'pan':
+                        return /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(number);
+                    case 'driving':
+                        return /^[A-Z0-9]{8,16}$/.test(number);
+                    case 'passport':
+                        return /^[A-Z]{1}[0-9]{7}$/.test(number);
+                    default:
+                        return false;
+                }
+            }
+        
+            function isValidFutureDate(dateStr) {
+                if (!dateStr) return false;
+                const selectedDate = new Date(dateStr);
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                return selectedDate >= today;
+            }
+        
+            function isValidDateRange(pickupDate, pickupTime, dropDate, dropTime) {
+                const pickup = new Date(`${pickupDate}T${pickupTime}`);
+                const drop = new Date(`${dropDate}T${dropTime}`);
+                return drop > pickup;
+            }
+        
+            function showError(fieldId, errorMsg = 'This field is required') {
+                const field = document.getElementById(fieldId);
+                const errorElement = document.getElementById(`${fieldId}-error`);
+                if (field) field.classList.add('error');
+                if (errorElement) {
+                    errorElement.textContent = errorMsg;
+                    errorElement.style.display = 'block';
+                }
+            }
+        
+            function hideError(fieldId) {
+                const field = document.getElementById(fieldId);
+                const errorElement = document.getElementById(`${fieldId}-error`);
+                if (field) field.classList.remove('error');
+                if (errorElement) errorElement.style.display = 'none';
+            }
+        
+            // Form submission
+            bookingForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+        
+                const name = document.getElementById('name').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const address = document.getElementById('address').value.trim();
+                const idProofType = document.getElementById('id-proof').value;
+                const idNumber = document.getElementById('id-number').value.trim();
+                const pickupDate = document.getElementById('pickup-date').value;
+                const pickupTime = document.getElementById('pickup-time').value;
+                const dropDate = document.getElementById('drop-date').value;
+                const dropTime = document.getElementById('drop-time').value;
+                const pickupLocation = document.getElementById('pickup-location').value;
+                const termsAccepted = document.getElementById('terms').checked;
+        
+                // Reset all errors
+                const fields = [
+                    'name', 'phone', 'email', 'address', 'id-proof', 'id-number',
+                    'pickup-date', 'pickup-time', 'drop-date', 'drop-time', 'pickup-location', 'terms'
+                ];
+                fields.forEach(hideError);
+        
+                let isValid = true;
+        
+                if (!name || name.length < 3) {
+                    isValid = false;
+                    showError('name', name ? 'Name must be at least 3 characters' : 'Please enter your full name');
+                }
+        
+                if (!isValidPhone(phone)) {
+                    isValid = false;
+                    showError('phone', 'Please enter a valid 10-digit phone number');
+                }
+        
+                if (!isValidEmail(email)) {
+                    isValid = false;
+                    showError('email', 'Please enter a valid email address');
+                }
+        
+                if (!address || address.length < 10) {
+                    isValid = false;
+                    showError('address', 'Please provide a complete address');
+                }
+        
+                if (!idProofType) {
+                    isValid = false;
+                    showError('id-proof');
+                }
+        
+                if (!isValidID(idProofType, idNumber)) {
+                    isValid = false;
+                    showError('id-number', 'Please enter a valid ID number for the selected ID type');
+                }
+        
+                if (!pickupDate || !isValidFutureDate(pickupDate)) {
+                    isValid = false;
+                    showError('pickup-date', pickupDate ? 'Please select a future date' : 'Pickup date is required');
+                }
+        
+                if (!pickupTime) {
+                    isValid = false;
+                    showError('pickup-time');
+                }
+        
+                if (!dropDate) {
+                    isValid = false;
+                    showError('drop-date');
+                }
+        
+                if (!dropTime) {
+                    isValid = false;
+                    showError('drop-time');
+                }
+        
+                if (pickupDate && pickupTime && dropDate && dropTime) {
+                    if (!isValidDateRange(pickupDate, pickupTime, dropDate, dropTime)) {
+                        isValid = false;
+                        showError('drop-date', 'Drop must be after pickup date/time');
+                    }
+                }
+        
+                if (!pickupLocation) {
+                    isValid = false;
+                    showError('pickup-location', 'Please select a pickup location');
+                }
+        
+                if (!termsAccepted) {
+                    isValid = false;
+                    showError('terms', 'You must accept the terms and conditions');
+                }
+        
+                // If all validations pass
+                if (isValid) {
+                    loader.style.display = 'flex';
+        
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                        const bookingId = generateBookingID();
+                        document.getElementById('booking-id').textContent = bookingId;
+        
+                        document.getElementById('summary-name').textContent = name;
+                        document.getElementById('summary-phone').textContent = phone;
+                        document.getElementById('summary-email').textContent = email;
+                        document.getElementById('summary-address').textContent = address;
+                        document.getElementById('summary-id').textContent = `${idProofNames[idProofType]} - ${idNumber}`;
+        
+                        const formattedDate = new Date(pickupDate).toLocaleDateString('en-IN', {
+                            day: 'numeric', month: 'short', year: 'numeric'
+                        });
+        
+                        document.getElementById('summary-datetime').textContent = `${formattedDate} at ${pickupTime}`;
+                        document.getElementById('summary-location').textContent = locationNames[pickupLocation];
+        
+                        bookingForm.style.display = 'none';
+                        bookingSummary.style.display = 'block';
+        
+                        document.querySelector('.header h1').textContent = 'Booking Confirmed!';
+                        document.querySelector('.header p').textContent = 'Your advance payment has been received';
+                    }, 2000);
+                } else {
+                    const firstError = document.querySelector('.error');
+                    if (firstError) {
+                        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }
+            });
+        
+            // Inline validation events
+            document.getElementById('name').addEventListener('blur', function () {
+                const value = this.value.trim();
+                if (!value || value.length < 3) {
+                    showError('name', 'Name must be at least 3 characters');
+                } else {
+                    hideError('name');
+                }
+            });
+        
+            document.getElementById('phone').addEventListener('blur', function () {
+                if (!isValidPhone(this.value.trim())) {
+                    showError('phone', 'Please enter a valid 10-digit phone number');
+                } else {
+                    hideError('phone');
+                }
+            });
+        
+            document.getElementById('email').addEventListener('blur', function () {
+                if (!isValidEmail(this.value.trim())) {
+                    showError('email', 'Please enter a valid email');
+                } else {
+                    hideError('email');
+                }
+            });
+        
+            document.getElementById('address').addEventListener('blur', function () {
+                const value = this.value.trim();
+                if (!value || value.length < 10) {
+                    showError('address', 'Please provide a complete address');
+                } else {
+                    hideError('address');
+                }
+            });
+        
+            document.getElementById('id-proof').addEventListener('change', function () {
+                const idNumber = document.getElementById('id-number').value.trim();
+                if (!this.value) {
+                    showError('id-proof');
+                } else {
+                    hideError('id-proof');
+                    if (idNumber && !isValidID(this.value, idNumber)) {
+                        showError('id-number', 'Invalid ID for selected type');
+                    } else {
+                        hideError('id-number');
+                    }
+                }
+            });
+        
+            document.getElementById('id-number').addEventListener('blur', function () {
+                const type = document.getElementById('id-proof').value;
+                if (!isValidID(type, this.value.trim())) {
+                    showError('id-number', 'Invalid ID for selected type');
+                } else {
+                    hideError('id-number');
+                }
+            });
+        
+            document.getElementById('drop-date').addEventListener('change', function () {
+                const pickupDateValue = document.getElementById('pickup-date').value;
+                const dropDateValue = this.value;
+                if (!dropDateValue) {
+                    showError('drop-date', 'Please select a drop date');
+                } else if (pickupDateValue && new Date(dropDateValue) < new Date(pickupDateValue)) {
+                    showError('drop-date', 'Drop date cannot be before pickup date');
+                } else {
+                    hideError('drop-date');
+                }
+            });
+        
+            document.getElementById('terms').addEventListener('change', function () {
+                if (!this.checked) {
+                    showError('terms', 'You must accept the terms and conditions');
+                } else {
+                    hideError('terms');
+                }
+            });
+        });
+        </script>
+        
+</body>
+</html>

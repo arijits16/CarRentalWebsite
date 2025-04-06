@@ -104,7 +104,7 @@ document.getElementById('loginForm')?.addEventListener('submit', function(e) {
     if (user) {
         // Store the current user in local storage
         localStorage.setItem('currentUser', user.username);
-        
+        localStorage.setItem("isLoggedIn",true)
         // Successful login - redirect to homepage
         window.location.href = 'Opening page.html';
     } else {
